@@ -9,7 +9,8 @@
                 <div class="card-body d-flex justify-content-center align-items-center flex-column">
                     <h5 class="card-title"><%: articulo.nombre %></h5>
                     <p class="card-text"><%: articulo.descripcion %></p>
-                    <a href=" verArticulo.aspx?id=<%: articulo.id %>" class="btn btn-primary">Ver</a>
+                    <h1 class="fw-bold">$<%: articulo.precio %></h1>
+                    <a href=" verArticulo.aspx?id=<%: articulo.id %>" class="btn btn-primary px-5">Ver</a>
                 </div>
             </div>
         <% } %>

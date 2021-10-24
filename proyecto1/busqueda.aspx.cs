@@ -10,15 +10,15 @@ using negocio;
 
 namespace proyecto1
 {
-    public partial class verArticulo : System.Web.UI.Page
+    public partial class busqueda : System.Web.UI.Page
     {
-        public Articulo articulo = null;
+        public List<Articulo> articuloList;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["id"] == null) return;
+            if (Request.QueryString["buscar"] == null) return;
+            string nombreArt = Request.QueryString["buscar"];
             ArticuloNegocio artNego = new ArticuloNegocio();
-            int artID = Convert.ToInt32(Request.QueryString["id"]);
-            articulo = artNego.buscar_por_id(artID);
+            articuloList = artNego.buscar(nombreArt);
         }
     }
 }

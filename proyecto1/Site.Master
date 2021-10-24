@@ -70,8 +70,8 @@
 
             <ul class="collapse bg-primary p-3 w-100" id="buscador">
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success mt-2" type="submit">Search</button>
+                    <asp:TextBox class="form-control me-2" placeholder="Ingresar texto" ID="TextBoxBuscador" runat="server"></asp:TextBox>
+                    <asp:Button class="btn btn-success mt-2" ID="Button1" runat="server" OnClick="Button1_Click" Text="Buscar" />
                 </form>
             </ul>
             <ul class="collapse bg-success w-100" id="carrito">
