@@ -17,6 +17,11 @@ namespace proyecto1
         {
             ArticuloNegocio artNego = new ArticuloNegocio();
             articuloList = artNego.listar();
+            if (Request.QueryString["accion"] != null)
+            {
+                if (Request.QueryString["accion"] == "agregado") ScriptManager.RegisterStartupScript(this, typeof(Page), "agregado", "agregado();", true);
+                if (Request.QueryString["accion"] == "eliminado") ScriptManager.RegisterStartupScript(this, typeof(Page), "eliminado", "eliminado();", true);
+            }
         }
     }
 }

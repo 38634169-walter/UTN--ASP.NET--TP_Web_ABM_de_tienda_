@@ -15,6 +15,11 @@
         a{
             text-decoration:none;
         }
+        #myDiv .swal2-container {
+            position:absolute;
+            width:100%;
+            left:0;
+        }
     </style>
 
     <asp:PlaceHolder runat="server">
@@ -27,6 +32,9 @@
     <link href="~/Content/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!--Font-AWSOME-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <!--Sweet alert 2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <form runat="server">
@@ -48,14 +56,16 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
+
                 <%--Site Scripts--%>
+
             </Scripts>
         </asp:ScriptManager>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-gradient bg-dark position-fixed w-100 d-flex flex-column" style="z-index:2;">
             <div class="container-fluid">
                 <a class="navbar-brand text-light" href="Default">Mi tienda</a>
-                <div class="d-flex justify-content-center align-items-center">
+                <ul class="d-flex justify-content-center align-items-center pt-3">
                     <li class="nav-item">
                         <a class="nav-link me-2 text-light" href="Default.aspx">Inicio</a>
                     </li>
@@ -65,35 +75,61 @@
                     <button class="me-2 rounded-circle" type="button" data-bs-toggle="collapse" data-bs-target="#carrito" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-shopping-cart p-1"></i>
                     </button>
-                </div>
+                </ul>
             </div>
-
-            <ul class="collapse bg-primary p-3 w-100" id="buscador">
+            <ul class="collapse p-3 w-100" id="buscador">
                 <form class="d-flex">
                     <asp:TextBox class="form-control me-2" placeholder="Ingresar texto" ID="TextBoxBuscador" runat="server"></asp:TextBox>
                     <asp:Button class="btn btn-success mt-2" ID="Button1" runat="server" OnClick="Button1_Click" Text="Buscar" />
                 </form>
             </ul>
-            <ul class="collapse bg-success w-100" id="carrito">
-                <li><a class="dropdown-item" href="#suscribirse">Suscripcion</a></li>
-                <li><a class="dropdown-item" href="#informacion">Medios de pago</a></li>
-                <li><a class="dropdown-item" href="#informacion">Info</a></li>
+            <ul class="collapse w-100 pb-5" style="max-height:50vh;overflow-y:scroll;" id="carrito">
+                <p class="h1 text-light fw-bold text-center" >En mi carrito</p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class="fas fa-shopping-cart text-dark bg-light rounded-circle h1 p-4"></i>
+                </div>
+
+                <% if (articulosCarrito != null)
+                    { %>
+                    <% foreach (var art in articulosCarrito)
+                        { %>
+                        <div class="d-flex justify-content-start align-content-center flex-row border border-light border-end-0 border-start-0 my-2 py-2">
+                            <img class="mx-2" src="<%: !(string.IsNullOrEmpty(art.imagenUrl)) ? art.imagenUrl : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
+                            
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="text-light" >Nombre: <%: art.nombre %></strong> 
+                                <div class="d-flex justify-content-center align-items-center flex-row">
+                                    <strong class="text-light pe-2">Precio: </strong>
+                                    <strong class="text-light" style="font-size:15px;">$ <%: art.precioEntero %> </strong>
+                                    <strong class="text-light pb-1" style="font-size:11px;"><%: art.precioDecimal %></strong>
+                                </div>
+                                <strong class="text-light" >Cantidad: <%: art.cantidad %></strong> 
+                            </div>
+
+                            <div class=" position-relative">
+                                <a href="quitarArticulo.aspx?id= <%: art.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row" >Quitar</a>
+                            </div>
+                        </div>
+
+                    <% } %>
+                <% } %>
+                
             </ul>
         </nav>
         <div class="container body-content pt-5 ">
             <br />
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            <div class="myDiv"></div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" ClientIDMode="Static">
+                
             </asp:ContentPlaceHolder>
          
          
 
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
-            </footer>
             <script src="~/Content/bootstrap/dist/js/bootstrap.min.js"></script>
         </div>
-
+        <script src="/Content/js/confirmaciones.js"></script>
+        <script src="/Content/js/agregarRepetido.js"></script>
     </form>
 </body>
 </html>
