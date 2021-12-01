@@ -28,5 +28,10 @@ namespace proyecto1
             string nombreArticulo = TextBoxBuscador.Text;
             Response.Redirect("busqueda.aspx?buscar="+ nombreArticulo);
         }
+
+        protected void buttonComprar_Click(object sender, EventArgs e)
+        {
+            if (Session["logged"] == null) Response.Redirect("registrarse.aspx?noRegistrado=" + "noRegistrado");
+        }
     }
 }

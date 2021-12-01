@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="busqueda.aspx.cs" Inherits="proyecto1.busqueda" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
+    <div class="text-center mt-5">
+        <h1>Resultados para... <%: buscar %> </h1>
+    </div>
 
     <div class="d-flex flex-wrap justify-content-center align-items-center mt-5">
         <% foreach(var articulo in articuloList) { %>                
@@ -17,5 +20,10 @@
                 </div>
             </div>
         <% } %>
+        <% if (!articuloList.Any()) { %>
+            <div class="text-center bg-dark text-secondary rounded-circle p-5">
+                <h1><i class="fas fa-search pe-3"></i> No hay resultados para la busqueda </h1>
+            </div>
+        <%} %>
     </div>
 </asp:Content>

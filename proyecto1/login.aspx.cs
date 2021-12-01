@@ -13,5 +13,10 @@ namespace proyecto1
         {
 
         }
+
+        protected void buttonIngresar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

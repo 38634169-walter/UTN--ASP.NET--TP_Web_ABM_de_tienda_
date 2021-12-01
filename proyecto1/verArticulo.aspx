@@ -7,7 +7,7 @@
 
             <h1 class="text-center shadow bg-dark p-3 text-light rounded-circle mt-5"><%: articulo.nombre %></h1>
 
-            <div class="d-none position-absolute top-50 start-50 translate-middle" id="confirmarAgregar">
+            <div class="d-none position-fixed top-50 start-50 translate-middle" id="modal">
                     <div class="modal-dialog">
                         <div class="modal-content bg-secondary">
                             <div class="modal-header">

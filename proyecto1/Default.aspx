@@ -5,7 +5,7 @@
     <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="z-index:1;">
         <% foreach (var articulo in articuloList) { %>
             <div class="card m-2" style="width: 18rem;">
-                <img src="<%: !(string.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" alt="" height="255px">
+                <img src="<%: !(String.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" alt="" height="255px">
                 <div class="card-body d-flex justify-content-center align-items-center flex-column">
                     <h5 class="card-title"><%: articulo.nombre %></h5>
                     <p class="card-text"><%: articulo.detalle %></p>

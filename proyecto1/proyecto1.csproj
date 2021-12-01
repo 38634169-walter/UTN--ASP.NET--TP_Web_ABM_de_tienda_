@@ -107,7 +107,8 @@
   <ItemGroup>
     <Content Include="busqueda.aspx" />
     <Content Include="Content\js\confirmaciones.js" />
-    <Content Include="Content\js\agregarRepetido.js" />
+    <Content Include="Content\js\modalAbrirCerrar.js" />
+    <Content Include="Content\js\validarLogin.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

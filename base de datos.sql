@@ -1,4 +1,5 @@
 CREATE DATABASE TIENDA
+
 GO
 USE TIENDA
 
@@ -59,8 +60,9 @@ CREATE TABLE DatosPersonales(
 	sexo VARCHAR(15) NOT NULL,
 	fechaNacimiento DATE NOT NULL CHECK(fechaNacimiento<GETDATE()),
 	email VARCHAR(50) NOT NULL,
-	codigoPostal TINYINT NOT NULL
+	codigoPostal VARCHAR(10) NOT NULL
 )
+
 CREATE TABLE Usuarios(
 	IDUsuario BIGINT NOT NULL FOREIGN KEY REFERENCES DatosPersonales(IDDatosPersonales),
 	usuario VARCHAR(30) NOT NULL,
@@ -163,3 +165,41 @@ INSERT INTO EstadosVentas(nombreEst)VALUES
 ('En camino'),
 ('Recibido'),
 ('Cancelado')
+
+
+----------------------------------------------------------
+----------------PROCEDIMIENTOS ALMACENADOS----------------
+----------------------------------------------------------
+
+alter PROCEDURE PS_INSERTAR_USUARIO(
+	@nombre VARCHAR(30),
+	@apellido VARCHAR(30),
+	@dni VARCHAR(11),
+	@sexo VARCHAR(15),
+	@fechaNacimiento DATE,
+	@email VARCHAR(50),
+	@codigoPostal VARCHAR(10),
+	@clave VARCHAR(30),
+	@usuario VARCHAR(30)
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			
+			DECLARE @IDUsuario BIGINT
+
+			INSERT INTO DatosPersonales(nombreDat,apellidoDat,dni,sexo,fechaNacimiento,email,codigoPostal)VALUES
+			(@nombre,@apellido,@dni,@sexo,@fechaNacimiento,@email,@codigoPostal)
+			SET @IDUsuario = @@IDENTITY
+
+			INSERT INTO Usuarios(IDUsuario,usuario,clave,fechaAlta)VALUES
+			(@IDUsuario,@usuario,@clave,GETDATE())
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('NO SE PUDO AGREGAR',16,1)
+	END CATCH
+END

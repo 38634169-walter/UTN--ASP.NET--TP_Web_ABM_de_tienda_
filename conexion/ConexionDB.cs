@@ -24,7 +24,7 @@ namespace conexion
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
-        public void abrir_conexion_y_consultar()
+        public void ejecutar_lectura()
         {
             comando.Connection = conexion;
             try
@@ -38,7 +38,7 @@ namespace conexion
             }
         }
 
-        public void abrir_conexion_y_ejecutar()
+        public void ejecutar_escritura()
         {
             comando.Connection = conexion;
             try

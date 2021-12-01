@@ -12,13 +12,15 @@ namespace proyecto1
 {
     public partial class busqueda : System.Web.UI.Page
     {
+        public string buscar;
         public List<Articulo> articuloList;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["buscar"] != null)
             {
+                buscar = Request.QueryString["buscar"].ToString();
                 ArticuloNegocio artNego = new ArticuloNegocio();
-                articuloList = artNego.listar("nombre", Request.QueryString["buscar"].ToString());
+                articuloList = artNego.listar("nombre", buscar);
             }
         }
     }
