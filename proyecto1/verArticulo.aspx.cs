@@ -13,14 +13,14 @@ namespace proyecto1
     public partial class verArticulo : System.Web.UI.Page
     {
         public static Articulo articulo;
-        public static List<Articulo> articulosList;
+        public DetalleVenta detalleVenta;
+        public static List<DetalleVenta> detalleVentaList;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["id"] != null)
             {
                 ArticuloNegocio artNego = new ArticuloNegocio();
-                int artID = Convert.ToInt32(Request.QueryString["id"]);
-                articulo = artNego.buscar_por_id(artID);
+                articulo = artNego.buscar("id",Request.QueryString["id"].ToString());
             }
             if (!IsPostBack)
             {
@@ -30,16 +30,19 @@ namespace proyecto1
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            articulosList = new List<Articulo>();
+            detalleVentaList = new List<DetalleVenta>();
+            detalleVenta = new DetalleVenta();
             if (validar_producto_existente())
             {
-                articulo.cantidad = Convert.ToInt32(LabelCantidad.Text);
+                detalleVenta.cantidad = Convert.ToInt32(LabelCantidad.Text);
+                detalleVenta.articulo = new Articulo();
+                detalleVenta.articulo = articulo;
                 if (Session["articulosAgregados"] != null)
                 {
-                    articulosList = (List<Articulo>)Session["articulosAgregados"];
+                    detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
                 }
-                articulosList.Add(articulo);
-                Session.Add("articulosAgregados", articulosList);
+                detalleVentaList.Add(detalleVenta);
+                Session.Add("articulosAgregados", detalleVentaList);
                 string agregado = "agregado";
                 Response.Redirect("Default.aspx?accion=" + agregado);
             }
@@ -65,11 +68,11 @@ namespace proyecto1
         {
             if (Session["articulosAgregados"] != null)
             {
-                articulosList = (List<Articulo>)Session["articulosAgregados"];
+                detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
                 bool encontrado = false;
-                foreach (var art in articulosList)
+                foreach (var det in detalleVentaList)
                 {
-                    if (art.id == Convert.ToInt32(Request.QueryString["id"]))
+                    if (det.articulo.id == Convert.ToInt32(Request.QueryString["id"]))
                     {
                         encontrado = true;
                     }
@@ -85,14 +88,14 @@ namespace proyecto1
 
         protected void buttonConfrmarAgregar_Click(object sender, EventArgs e)
         {
-            foreach (var art in articulosList)
+            foreach (var det in detalleVentaList)
             {
-                if (art.id == Convert.ToInt32(Request.QueryString["id"]))
+                if (det.articulo.id == Convert.ToInt32(Request.QueryString["id"]))
                 {
-                    art.cantidad += Convert.ToInt32(LabelCantidad.Text);
+                    det.cantidad += Convert.ToInt32(LabelCantidad.Text);
                 }
             }
-            Session.Add("articulosAgregados", articulosList);
+            Session.Add("articulosAgregados", detalleVentaList);
             string agregado = "agregado";
             Response.Redirect("Default.aspx?accion=" + agregado);
         }

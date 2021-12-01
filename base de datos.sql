@@ -1,101 +1,165 @@
-use master
-go
-create database CATALOGO_DB
-go
-use CATALOGO_DB
-go
-USE [CATALOGO_DB]
+CREATE DATABASE TIENDA
 GO
+USE TIENDA
 
-SET ANSI_NULLS ON
-GO
+CREATE TABLE Paises(
+	IDPais SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nombrePai VARCHAR(30) NOT NULL
+)
+CREATE TABLE Marcas(
+	IDMarca SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	ID_Pais SMALLINT NOT NULL FOREIGN KEY REFERENCES Paises(IDPais),
+	nombreMar VARCHAR(30) NOT NULL
+)
+CREATE TABLE Categorias(
+	IDCategoria SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nombreCat VARCHAR(30) NOT NULL
+)
+CREATE TABLE SubCategorias(
+	IDSubCategoria SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	ID_Categoria SMALLINT NOT NULL FOREIGN KEY REFERENCES Categorias(IDCategoria),
+	nombreSub VARCHAR(30) NOT NULL
+)
+CREATE TABLE Articulos(
+	IDArticulo BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	ID_SubCategoria SMALLINT NOT NULL FOREIGN KEY REFERENCES SubCategorias(IDSubCategoria),
+	ID_Marca SMALLINT NOT NULL FOREIGN KEY REFERENCES Marcas(IDMarca),
+	nombreArt VARCHAR(30) NOT NULL,
+	precio MONEY NOT NULL,	
+	detalles VARCHAR(400) NOT NULL,
+	imagen1 VARCHAR(100) NOT NULL,
+	imagen2 VARCHAR(100) NOT NULL,
+	imagen3 VARCHAR(100) NOT NULL,
+)
+CREATE TABLE Stocks(
+	IDStock BIGINT NOT NULL FOREIGN KEY REFERENCES Articulos(IDArticulo),
+	cantidad BIGINT NOT NULL,
+	PRIMARY KEY(IDStock)
+)
 
-SET QUOTED_IDENTIFIER ON
-GO
+CREATE TABLE IngresosArticulos(
+	IDIngresoArticulo BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	ID_Stock BIGINT NOT NULL FOREIGN KEY REFERENCES Stocks(IDStock),
+	cantidad BIGINT NOT NULL,
+	fechaIngreso DATE NOT NULL CHECK(fechaIngreso>=GETDATE())
+)
 
-SET ANSI_PADDING ON
-GO
+CREATE TABLE SalidasArticulos(
+	IDSalidaArticulo BIGINT NOT NULL PRIMARY KEY IDENTITY (1,1),
+	ID_Stock BIGINT NOT NULL FOREIGN KEY REFERENCES Stocks(IDStock),
+	cantidad BIGINT NOT NULL,
+	fechaSalida DATE NOT NULL CHECK(fechaSalida>=GETDATE())
+)
 
-CREATE TABLE [dbo].[MARCAS](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](50) NULL,
- CONSTRAINT [PK_MARCAS] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+CREATE TABLE DatosPersonales(
+	IDDatosPersonales BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nombreDat VARCHAR(30) NOT NULL,
+	apellidoDat VARCHAR(30) NOT NULL,
+	dni VARCHAR(11) NOT NULL,
+	sexo VARCHAR(15) NOT NULL,
+	fechaNacimiento DATE NOT NULL CHECK(fechaNacimiento<GETDATE()),
+	email VARCHAR(50) NOT NULL,
+	codigoPostal TINYINT NOT NULL
+)
+CREATE TABLE Usuarios(
+	IDUsuario BIGINT NOT NULL FOREIGN KEY REFERENCES DatosPersonales(IDDatosPersonales),
+	usuario VARCHAR(30) NOT NULL,
+	clave VARCHAR(30) NOT NULL,
+	fechaAlta DATE NOT NULL
+	PRIMARY KEY(IDUsuario)
+)
+CREATE TABLE EstadosVentas(
+	IDEstadoVenta TINYINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nombreEst VARCHAR(30) NOT NULL,
+)
 
-GO
+CREATE TABLE Ventas(
+	IDVenta BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	ID_DatosPersonales BIGINT NOT NULL FOREIGN KEY REFERENCES DatosPersonales(IDDatosPersonales),
+	ID_EstadoVenta TINYINT NOT NULL FOREIGN KEY REFERENCES EstadosVentas(IDEstadoVenta),
+	monto MONEY NOT NULL,
+	fechaVenta DATE NOT NULL,
+	LocalidadEntrega VARCHAR(30) NOT NULL,
+	CalleEntrega VARCHAR(30) NOT NULL,
+	numeroCalleEntrega TINYINT NOT NULL,
+	telefonoEntrega VARCHAR(20) NOT NULL,
+	comentario VARCHAR(200) NULL
+)
+CREATE TABLE DetallesDeVentas(
+	IDDetalleVenta BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	ID_Venta BIGINT NOT NULL FOREIGN KEY REFERENCES Ventas(IDVenta),
+	ID_Articulo BIGINT NOT NULL FOREIGN KEY REFERENCES Articulos(IDArticulo),
+	cantidad SMALLINT NOT NULL,
+)
 
-SET ANSI_PADDING OFF
-GO
 
-USE [CATALOGO_DB]
-GO
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------INSERTES----------------------
+-----------------------------------------------------
+-----------------------------------------------------
 
-/****** Object:  Table [dbo].[CATEGORIAS]    Script Date: 08/09/2019 10:32:14 a.m. ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+INSERT INTO Paises(nombrePai)VALUES
+('Argentina'),
+('Brasil'),
+('Estados Unidos')
 
-SET ANSI_PADDING ON
-GO
+INSERT INTO Marcas(ID_Pais,nombreMar)VALUES
+(1,'Liliana'),
+(2,'Mondial'),
+(1,'Tascani'),
+(3,'Nike')
 
-CREATE TABLE [dbo].[CATEGORIAS](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](50) NULL,
- CONSTRAINT [PK_CATEGORIAS] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+INSERT INTO Categorias(nombreCat) VALUES
+('Electrodomesticos'),
+('Ropa')
 
-GO
+INSERT INTO SubCategorias(ID_Categoria,nombreSub) VALUES
+(1,'Licuadoras'),
+(2,'Zapatillas'),
+(1,'Calefactores'),
+(2,'Shorts')
 
-SET ANSI_PADDING OFF
-GO
+INSERT INTO Articulos(ID_SubCategoria,ID_Marca,nombreArt,precio,detalles,imagen1,imagen2,imagen3) VALUES
+(1,1,'Licuadora Liliana',3600.99,'Liquadora Liliana los mejores liquados de tu vida, asegurado.','/Content/img/Liquadoras/1_1.webp','/Content/img/Liquadoras/1_2.webp','/Content/img/Liquadoras/1_3.webp'),
+(1,2,'Liquadora Mondial',3200.50,'Liquadora Mondial te corta hasta las ganas de vivir.','/Content/img/Liquadoras/2_1.webp','/Content/img/Liquadoras/2_2.webp','/Content/img/Liquadoras/2_3.webp'),
+(2,1,'Zapatillas Tascani2',6700.99,'Zapatillas Tascani con estas quedas bien donde vayas.','/Content/img/Zapatillas/1_1.webp','/Content/img/Zapatillas/1_2.webp','/Content/img/Zapatillas/1_3.webp'),
+(2,1,'Zapatillas Tascani',6200.99,'Zapatillas Tascani nunca vas a tener los pies tan comodos.','/Content/img/Zapatillas/2_1.webp','/Content/img/Zapatillas/2_2.webp','/Content/img/Zapatillas/2_3.webp'),
+(2,2,'Zapatillas Nike',5200.00,'Zapatillas Nike con estas no hizo goles messi pero vos los vas a hacer.','/Content/img/Zapatillas/3_1.jpg','/Content/img/Zapatillas/3_2.jpg','/Content/img/Zapatillas/3_3.jpg'),
+(3,2,'Caloventor Mondial',5200.00,'Calovetor Mondial muy caliente para invierno.','/Content/img/Caloventores/1_1.jpg','/Content/img/Caloventores/1_2.jpg','/Content/img/Caloventores/1_3.jpg'),
+(3,1,'Caloventor Liliana',6200.99,'Calovetor Liliana mas caliente que cualquier otro.','/Content/img/Caloventores/2_1.jpg','/Content/img/Caloventores/2_2.jpg','/Content/img/Caloventores/2_3.jpg'),
+(4,1,'Shortcito espectacular',2200.99,'Short Tascani si te lo pone no te lo sacas mas.','/Content/img/Shorts/1_1.jpg','/Content/img/Shorts/1_2.jpg','/Content/img/Shorts/1_3.jpg')
 
-USE [CATALOGO_DB]
-GO
+INSERT INTO Stocks (IDStock,cantidad) VALUES
+(1,100),
+(2,150),
+(3,100),
+(4,150),
+(5,100),
+(6,150),
+(7,100),
+(8,150)
 
-/****** Object:  Table [dbo].[ARTICULOS]    Script Date: 08/09/2019 10:32:24 a.m. ******/
-SET ANSI_NULLS ON
-GO
+INSERT INTO IngresosArticulos(ID_Stock,cantidad,fechaIngreso)VALUES
+(1,100,'2021/12/01'),
+(2,200,'2021/12/01'),
+(3,100,'2021/12/01'),
+(4,200,'2021/12/01'),
+(5,100,'2021/12/01'),
+(6,200,'2021/12/01'),
+(7,100,'2021/12/01'),
+(8,200,'2021/12/01')
 
-SET QUOTED_IDENTIFIER ON
-GO
+INSERT INTO SalidasArticulos(ID_Stock,cantidad,fechaSalida)VALUES
+(2,50,'2021/12/03'),
+(4,50,'2021/12/03'),
+(6,50,'2021/12/03'),
+(8,50,'2021/12/03')
 
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[ARTICULOS](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Codigo] [varchar](50) NULL,
-	[Nombre] [varchar](50) NULL,
-	[Descripcion] [varchar](150) NULL,
-	[IdMarca] [int] NULL,
-	[IdCategoria] [int] NULL,
-	[ImagenUrl] [varchar](1000) NULL,
-	[Precio] [money] NULL,
- CONSTRAINT [PK_ARTICULOS] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-insert into MARCAS values ('Samsung'), ('Apple'), ('Sony'), ('Huawei'), ('Motorola')
-insert into CATEGORIAS values ('Celulares'),('Televisores'), ('Media'), ('Audio')
-insert into ARTICULOS values ('S01', 'Galaxy S10', 'Una canoa cara', 1, 1, 'https://images.samsung.com/is/image/samsung/co-galaxy-s10-sm-g970-sm-g970fzyjcoo-frontcanaryyellow-thumb-149016542', 69.999),
-('M03', 'Moto G Play 7ma Gen', 'Ya siete de estos?', 1, 5, 'https://www.motorola.cl/arquivos/moto-g7-play-img-product.png?v=636862863804700000', 15699),
-('S99', 'Play 4', 'Ya no se cuantas versiones hay', 3, 3, 'https://www.euronics.cz/image/product/800x800/532620.jpg', 35000),
-('S56', 'Bravia 55', 'Alta tele', 3, 2, 'https://intercompras.com/product_thumb_keepratio_2.php?img=images/product/SONY_KDL-55W950A.jpg&w=650&h=450', 49500),
-('A23', 'Apple TV', 'lindo loro', 2, 3, 'https://cnnespanol2.files.wordpress.com/2015/12/gadgets-mc3a1s-populares-apple-tv-2015-18.jpg?quality=100&strip=info&w=460&h=260&crop=1', 7850)
-
-select * from ARTICULOS
+INSERT INTO EstadosVentas(nombreEst)VALUES
+('En carrito'),
+('Procesando'),
+('En camino'),
+('Recibido'),
+('Cancelado')

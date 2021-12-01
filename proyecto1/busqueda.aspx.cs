@@ -15,10 +15,11 @@ namespace proyecto1
         public List<Articulo> articuloList;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["buscar"] == null) return;
-            string nombreArt = Request.QueryString["buscar"];
-            ArticuloNegocio artNego = new ArticuloNegocio();
-            articuloList = artNego.buscar(nombreArt);
+            if (Request.QueryString["buscar"] != null)
+            {
+                ArticuloNegocio artNego = new ArticuloNegocio();
+                articuloList = artNego.listar("nombre", Request.QueryString["buscar"].ToString());
+            }
         }
     }
 }

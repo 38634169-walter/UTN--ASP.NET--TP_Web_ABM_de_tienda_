@@ -12,24 +12,23 @@ namespace proyecto1
 {
     public partial class quitarArticulo : System.Web.UI.Page
     {
-        public Articulo articulo;
-        public List<Articulo> articulosList;
+        public List<DetalleVenta> detalleVentasList;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Request.QueryString["id"] != null)
             {
                 int id = Convert.ToInt32(Request.QueryString["id"]);
-                articulosList = new List<Articulo>();
-                articulosList = (List<Articulo>)Session["articulosAgregados"];
+                detalleVentasList = new List<DetalleVenta>();
+                detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
                 int cont = 0;
                 bool b = false;
-                foreach (var articulo in articulosList)
+                foreach (var det in detalleVentasList)
                 {
-                    if (articulo.id == id) b = true;
+                    if (det.articulo.id == id) b = true;
                     if (b == false) cont++;
                 }
-                articulosList.RemoveAt(cont);
-                Session.Add("articulosAgregados",articulosList);
+                detalleVentasList.RemoveAt(cont);
+                Session.Add("articulosAgregados",detalleVentasList);
                 string accion = "eliminado";
                 Response.Redirect("Default.aspx?accion=" + accion);
             }

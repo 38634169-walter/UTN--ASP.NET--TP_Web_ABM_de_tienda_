@@ -117,7 +117,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="login.aspx" />
     <Content Include="quitarArticulo.aspx" />
+    <Content Include="registrarse.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -173,6 +175,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="quitarArticulo.aspx.cs">
       <DependentUpon>quitarArticulo.aspx</DependentUpon>
@@ -180,6 +189,13 @@
     </Compile>
     <Compile Include="quitarArticulo.aspx.designer.cs">
       <DependentUpon>quitarArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="registrarse.aspx.cs">
+      <DependentUpon>registrarse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="registrarse.aspx.designer.cs">
+      <DependentUpon>registrarse.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

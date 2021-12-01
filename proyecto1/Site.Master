@@ -15,11 +15,6 @@
         a{
             text-decoration:none;
         }
-        #myDiv .swal2-container {
-            position:absolute;
-            width:100%;
-            left:0;
-        }
     </style>
 
     <asp:PlaceHolder runat="server">
@@ -75,6 +70,9 @@
                     <button class="me-2 rounded-circle" type="button" data-bs-toggle="collapse" data-bs-target="#carrito" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-shopping-cart p-1"></i>
                     </button>
+                    <a href="login.aspx" class="me-2 rounded-circle bg-light px-2 py-1">
+                        <i class="fas fa-user text-dark p-1"></i>
+                    </a>
                 </ul>
             </div>
             <ul class="collapse p-3 w-100" id="buscador">
@@ -89,30 +87,40 @@
                     <i class="fas fa-shopping-cart text-dark bg-light rounded-circle h1 p-4"></i>
                 </div>
 
-                <% if (articulosCarrito != null)
-                    { %>
-                    <% foreach (var art in articulosCarrito)
+                <% if (detalleVentasList.Any())
+                    { 
+                        %>
+
+                        <asp:LinkButton CssClass="btn bg-success text-light d-flex justify-content-center align-items-center flex-row" style="margin-top:-2cm;width:15rem;height:2cm;"  ID="buttonComprar" runat="server">
+                            <i class="fas fa-shipping-fast h3"></i>
+                            <p class="ps-2 h3">Comprar</p>
+                        </asp:LinkButton>
+                    <% foreach (var det in detalleVentasList)
                         { %>
                         <div class="d-flex justify-content-start align-content-center flex-row border border-light border-end-0 border-start-0 my-2 py-2">
-                            <img class="mx-2" src="<%: !(string.IsNullOrEmpty(art.imagenUrl)) ? art.imagenUrl : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
+                            <img class="mx-2" src="<%: !(string.IsNullOrEmpty(det.articulo.imagen1)) ? det.articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
                             
                             <div class="d-flex justify-content-center align-items-start flex-column">
-                                <strong class="text-light" >Nombre: <%: art.nombre %></strong> 
+                                <strong class="text-light" >Nombre: <%: det.articulo.nombre %></strong> 
                                 <div class="d-flex justify-content-center align-items-center flex-row">
                                     <strong class="text-light pe-2">Precio: </strong>
-                                    <strong class="text-light" style="font-size:15px;">$ <%: art.precioEntero %> </strong>
-                                    <strong class="text-light pb-1" style="font-size:11px;"><%: art.precioDecimal %></strong>
+                                    <strong class="text-light" style="font-size:15px;">$ <%: det.articulo.precioEntero %> </strong>
+                                    <strong class="text-light pb-1" style="font-size:11px;"><%: det.articulo.precioDecimal %></strong>
                                 </div>
-                                <strong class="text-light" >Cantidad: <%: art.cantidad %></strong> 
+                                <strong class="text-light" >Cantidad: <%: det.cantidad %></strong> 
                             </div>
 
                             <div class=" position-relative">
-                                <a href="quitarArticulo.aspx?id= <%: art.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row" >Quitar</a>
+                                <a href="quitarArticulo.aspx?id= <%: det.articulo.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row" >Quitar</a>
                             </div>
                         </div>
 
                     <% } %>
-                <% } %>
+                <% }
+                    else
+                    { %>
+                        <h1 class="text-center"><i class="fas fa-box-open"></i> No hay articulos agregaso hasta el momento</h1>
+                <%} %>
                 
             </ul>
         </nav>

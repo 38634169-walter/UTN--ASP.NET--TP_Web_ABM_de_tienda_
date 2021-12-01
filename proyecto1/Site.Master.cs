@@ -12,14 +12,14 @@ namespace proyecto1
 {
     public partial class SiteMaster : MasterPage
     {
-        public List<Articulo> articulosCarrito;
+        public List<DetalleVenta> detalleVentasList;
         public Articulo art;
         protected void Page_Load(object sender, EventArgs e)
         {
+            detalleVentasList = new List<DetalleVenta>();
             if(Session["articulosAgregados"] != null)
             {
-                articulosCarrito = new List<Articulo>();
-                articulosCarrito = (List<Articulo>)Session["articulosAgregados"];
+                detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
             }
         }
 

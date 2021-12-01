@@ -32,14 +32,15 @@
             </div>
             <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column">
                 <div class="w-20 me-3">
-                    <img src="<%: !(string.IsNullOrEmpty(articulo.imagenUrl)) ? articulo.imagenUrl : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="300px" height="300px" />
+                    <img src="<%: !(string.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="300px" height="300px" />
                 </div>
                 <div>
-                    <p><strong>Descripcion: </strong><%: articulo.descripcion %></p>
-                    <p><strong>Marca: </strong><%: articulo.marca.descripcion %></p>
+                    <p><strong>Descripcion: </strong><%: articulo.detalle %></p>
+                    <p><strong>Marca: </strong><%: articulo.marca.nombre %></p>
 
 
-                    <p><strong>Categoria: </strong><%: articulo.categoria.descripcion %></p>
+                    <p><strong>Sub Categoria: </strong><%: articulo.subCategoria.nombre%></p>
+                    <p><strong>Categoria: </strong><%: articulo.subCategoria.categoria.nombre %></p>
                     <div class="d-flex justify-content-start align-items-center flex-row">
                         <strong class="fw-bold h1">$ <%: articulo.precioEntero %> </strong>
                         <strong class="pb-3" style="font-size: 15px;"><%: articulo.precioDecimal %></strong>

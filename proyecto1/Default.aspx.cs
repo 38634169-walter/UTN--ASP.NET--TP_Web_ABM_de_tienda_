@@ -16,7 +16,7 @@ namespace proyecto1
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio artNego = new ArticuloNegocio();
-            articuloList = artNego.listar();
+            articuloList = artNego.listar("todo","");
             if (Request.QueryString["accion"] != null)
             {
                 if (Request.QueryString["accion"] == "agregado") ScriptManager.RegisterStartupScript(this, typeof(Page), "agregado", "agregado();", true);
