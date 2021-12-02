@@ -2,7 +2,8 @@ CREATE DATABASE TIENDA
 
 GO
 USE TIENDA
-
+select * from EstadosVentas
+SELECT * FROM Usuarios u, DatosPersonales dp WHERE u.IDUsuario = dp.IDDatosPersonales AND u.usuario='wal' AND u.clave='123' 
 CREATE TABLE Paises(
 	IDPais SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	nombrePai VARCHAR(30) NOT NULL
@@ -171,7 +172,7 @@ INSERT INTO EstadosVentas(nombreEst)VALUES
 ----------------PROCEDIMIENTOS ALMACENADOS----------------
 ----------------------------------------------------------
 
-alter PROCEDURE PS_INSERTAR_USUARIO(
+CREATE PROCEDURE PS_INSERTAR_USUARIO(
 	@nombre VARCHAR(30),
 	@apellido VARCHAR(30),
 	@dni VARCHAR(11),
@@ -201,5 +202,24 @@ BEGIN
 	BEGIN CATCH
 		ROLLBACK TRANSACTION
 		RAISERROR('NO SE PUDO AGREGAR',16,1)
+	END CATCH
+END
+
+CREATE PROCEDURE INSERTAR_VENTA(
+	@ID_DatosPersonales BIGINT
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			DECLARE @ID_EstadoVenta TINYINT
+			SELECT @ID_EstadoVenta = IDEstadoVenta FROM EstadosVentas WHERE nombreEst='Cancelado'
+
+			INSERT INTO Ventas(ID_DatosPersonales,ID_EstadoVenta)VALUES(@ID_DatosPersonales,@ID_EstadoVenta)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('No se pudo agregar',16,1)
 	END CATCH
 END

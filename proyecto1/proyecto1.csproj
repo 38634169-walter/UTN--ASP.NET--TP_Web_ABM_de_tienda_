@@ -106,9 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="busqueda.aspx" />
+    <Content Include="carrito.aspx" />
     <Content Include="Content\js\confirmaciones.js" />
     <Content Include="Content\js\modalAbrirCerrar.js" />
     <Content Include="Content\js\validarLogin.js" />
+    <Content Include="Content\js\validarRegistro%28FALTA%29.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -119,6 +121,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="login.aspx" />
+    <Content Include="perfil.aspx" />
     <Content Include="quitarArticulo.aspx" />
     <Content Include="registrarse.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -166,6 +169,13 @@
     <Compile Include="busqueda.aspx.designer.cs">
       <DependentUpon>busqueda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="carrito.aspx.cs">
+      <DependentUpon>carrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="carrito.aspx.designer.cs">
+      <DependentUpon>carrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -182,6 +192,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="perfil.aspx.cs">
+      <DependentUpon>perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="perfil.aspx.designer.cs">
+      <DependentUpon>perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="quitarArticulo.aspx.cs">

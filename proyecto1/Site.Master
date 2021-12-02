@@ -69,9 +69,11 @@
                     <button class="me-2 rounded-circle" type="button" data-bs-toggle="collapse" data-bs-target="#carrito" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-shopping-cart p-1"></i>
                     </button>
-                    <a href="login.aspx" class="me-2 rounded-circle bg-light px-2 py-1">
-                        <i class="fas fa-user text-dark p-1"></i>
-                    </a>
+                    <asp:LinkButton ID="buttonPerfilRegistrar" runat="server" CssClass="me-2" OnClick="buttonPerfilRegistrar_Click">
+                        <i class="fas fa-user text-dark rounded-circle bg-light px-3 py-2"></i>
+                        <asp:Label ID="labelUsuario" runat="server" Text="" CssClass="text-light me-2 fw-bold text-decoration-none"></asp:Label>
+                    </asp:LinkButton>
+                    
                 </ul>
             </div>
             <ul class="collapse p-3 w-100" id="buscador">

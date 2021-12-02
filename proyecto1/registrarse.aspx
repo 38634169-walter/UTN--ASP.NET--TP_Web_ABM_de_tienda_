@@ -137,7 +137,7 @@
     <script>
         function validar_registro() {
             var validar = true;
-            if ($('#txbNombre').val() == "") {
+            if ($('#txbNombre').val().trim() === "") {
                 $('#txbNombre').removeClass('is-valid');
                 $('#txbNombre').addClass('is-invalid');
                 $('#nombre div').addClass('invalid-feedback');
@@ -149,7 +149,7 @@
                 $('#txbNombre').addClass('is-valid');
             }
 
-            if ($('#txbApellido').val() == "") {
+            if ($('#txbApellido').val().trim() === "") {
                 $('#txbApellido').removeClass('is-valid');
                 $('#txbApellido').addClass('is-invalid');
                 $('#apellido div').addClass('invalid-feedback');
@@ -176,7 +176,7 @@
             }
 
 
-            if ($('#txbFechaNacimiento').val() == "") {
+            if ($('#txbFechaNacimiento').val().trim() === "") {
                 $('#txbFechaNacimiento').removeClass('is-valid');
                 $('#txbFechaNacimiento').addClass('is-invalid');
                 $('#fechaNacimiento div').addClass('invalid-feedback');
@@ -184,8 +184,9 @@
                 validar = false;
             }
             else {
-                $('txbFechaNacimiento').removeClass('is-invalid');
-                $('txbFechaNacimiento').addClass('is-valid');
+                $('#txbFechaNacimiento').removeClass('is-invalid');
+                $('#txbFechaNacimiento').addClass('is-valid');
+                $('#fechaNacimiento div').html('');
             }
 
 

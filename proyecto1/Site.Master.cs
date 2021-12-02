@@ -14,13 +14,34 @@ namespace proyecto1
     {
         public List<DetalleVenta> detalleVentasList;
         public Articulo art;
+        public static Usuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             detalleVentasList = new List<DetalleVenta>();
-            if(Session["articulosAgregados"] != null)
+            if (Session["usuario"] != null)
             {
-                detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
+                if(Session["articulosAgregados"] != null)
+                {
+                    detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
+                    usuario = new Usuario();
+                    usuario = (Usuario)Session["usuario"];
+                    VentaNegocio venNego = new VentaNegocio();
+                    venNego.agregar(usuario.id.ToString());
+                    foreach(var d in detalleVentasList)
+                    {
+                        DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                    }
+                    Session.Remove("articulosAgregados");
+                }
+
+
+                usuario = new Usuario();
+                usuario = (Usuario)Session["usuario"];
+                labelUsuario.Text = usuario.usuario;
             }
+
+            if(Session["articulosAgregados"] != null) detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
+            
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -31,7 +52,17 @@ namespace proyecto1
 
         protected void buttonComprar_Click(object sender, EventArgs e)
         {
-            if (Session["logged"] == null) Response.Redirect("registrarse.aspx?noRegistrado=" + "noRegistrado");
+            if (Session["usuario"] == null) Response.Redirect("registrarse.aspx?noRegistrado=" + "noRegistrado");
+            Response.Redirect("carrito.aspx");
+        }
+
+        protected void buttonPerfilRegistrar_Click(object sender, EventArgs e)
+        {
+            if (Session["usuario"] != null)
+            {
+                Response.Redirect("perfil.aspx");
+            }
+            Response.Redirect("login.aspx");
         }
     }
 }
