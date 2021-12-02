@@ -15,33 +15,48 @@ namespace proyecto1
         public List<DetalleVenta> detalleVentasList;
         public Articulo art;
         public static Usuario usuario;
+        public string ventaId;
         protected void Page_Load(object sender, EventArgs e)
         {
             detalleVentasList = new List<DetalleVenta>();
             if (Session["usuario"] != null)
             {
-                if(Session["articulosAgregados"] != null)
-                {
-                    detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
-                    usuario = new Usuario();
-                    usuario = (Usuario)Session["usuario"];
-                    VentaNegocio venNego = new VentaNegocio();
-                    venNego.agregar(usuario.id.ToString());
-                    foreach(var d in detalleVentasList)
-                    {
-                        DetalleVentaNegocio detNego = new DetalleVentaNegocio();
-                    }
-                    Session.Remove("articulosAgregados");
-                }
-
-
                 usuario = new Usuario();
                 usuario = (Usuario)Session["usuario"];
                 labelUsuario.Text = usuario.usuario;
-            }
 
+                if (Session["articulosAgregados"] != null)
+                {
+                    detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
+                    VentaNegocio venNego = new VentaNegocio();
+                    venNego.agregar(usuario.id.ToString());
+                    Venta venta = new Venta();
+                    venta = venNego.buscar("ultima venta", usuario.id.ToString());
+                    if(Session["ventaId"] != null) Session.Add("ventaId",venta.id);
+                    foreach(var det in detalleVentasList)
+                    {
+                        det.venta = new Venta();
+                        det.venta.id = venta.id;
+                        DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                        detNego.agregar(det);
+                    }
+                    Session.Remove("articulosAgregados");
+                }
+                else
+                {
+                    if (Session["ventaId"] == null)
+                    {
+                        Venta venta = new Venta();
+                        VentaNegocio venNego = new VentaNegocio();
+                        venta = venNego.buscar("ultima venta", usuario.id.ToString());
+                        Session.Add("ventaId", venta.id);
+                    }
+                    DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                    detalleVentasList = detNego.listar("ventaId", Session["ventaId"].ToString());
+                }
+                
+            }
             if(Session["articulosAgregados"] != null) detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
-            
         }
 
         protected void Button1_Click(object sender, EventArgs e)

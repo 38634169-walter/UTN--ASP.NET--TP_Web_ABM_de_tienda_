@@ -15,6 +15,7 @@ namespace proyecto1
         public static Articulo articulo;
         public DetalleVenta detalleVenta;
         public static List<DetalleVenta> detalleVentaList;
+        public static string ventaId;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["id"] != null)
@@ -37,12 +38,21 @@ namespace proyecto1
                 detalleVenta.cantidad = Convert.ToInt32(LabelCantidad.Text);
                 detalleVenta.articulo = new Articulo();
                 detalleVenta.articulo = articulo;
-                if (Session["articulosAgregados"] != null)
-                {
-                    detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
+                if(Session["usuario"] != null) {
+                    detalleVenta.venta = new Venta();
+                    detalleVenta.venta.id =Convert.ToInt32(Session["ventaId"]);
+                    DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                    detNego.agregar(detalleVenta);
                 }
-                detalleVentaList.Add(detalleVenta);
-                Session.Add("articulosAgregados", detalleVentaList);
+                else
+                {
+                    if (Session["articulosAgregados"] != null)
+                    {
+                        detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
+                    }
+                    detalleVentaList.Add(detalleVenta);
+                    Session.Add("articulosAgregados", detalleVentaList);
+                }
                 string agregado = "agregado";
                 Response.Redirect("Default.aspx?accion=" + agregado);
             }
@@ -66,22 +76,28 @@ namespace proyecto1
 
         public bool validar_producto_existente()
         {
-            if (Session["articulosAgregados"] != null)
+            if (Session["articulosAgregados"] != null) detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
+            if(Session["usuario"] != null)
             {
-                detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
-                bool encontrado = false;
-                foreach (var det in detalleVentaList)
+                Usuario usuario = new Usuario();
+                usuario = (Usuario)Session["usuario"];
+                ventaId = Session["ventaId"].ToString();
+                DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                detalleVentaList = detNego.listar("ventaId",ventaId);
+            }
+
+            bool encontrado = false;
+            foreach (var det in detalleVentaList)
+            {
+                if (det.articulo.id == Convert.ToInt32(Request.QueryString["id"]))
                 {
-                    if (det.articulo.id == Convert.ToInt32(Request.QueryString["id"]))
-                    {
-                        encontrado = true;
-                    }
+                    encontrado = true;
                 }
-                if (encontrado == true)
-                {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "confirmar", "confirmarDesicion('" + "abrir" + "');", true);
-                    return false;
-                }
+            }
+            if (encontrado == true)
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "confirmar", "confirmarDesicion('" + "abrir" + "');", true);
+                return false;
             }
             return true;
         }

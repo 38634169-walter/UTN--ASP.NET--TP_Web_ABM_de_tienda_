@@ -2,8 +2,11 @@ CREATE DATABASE TIENDA
 
 GO
 USE TIENDA
-select * from EstadosVentas
-SELECT * FROM Usuarios u, DatosPersonales dp WHERE u.IDUsuario = dp.IDDatosPersonales AND u.usuario='wal' AND u.clave='123' 
+
+select * from Ventas as v
+inner join DetallesDeVentas as dv on dv.ID_Venta=v.IDVenta
+
+
 CREATE TABLE Paises(
 	IDPais SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	nombrePai VARCHAR(30) NOT NULL
@@ -76,18 +79,20 @@ CREATE TABLE EstadosVentas(
 	nombreEst VARCHAR(30) NOT NULL,
 )
 
-CREATE TABLE Ventas(
+drop TABLE Ventas(
 	IDVenta BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ID_DatosPersonales BIGINT NOT NULL FOREIGN KEY REFERENCES DatosPersonales(IDDatosPersonales),
 	ID_EstadoVenta TINYINT NOT NULL FOREIGN KEY REFERENCES EstadosVentas(IDEstadoVenta),
-	monto MONEY NOT NULL,
-	fechaVenta DATE NOT NULL,
-	LocalidadEntrega VARCHAR(30) NOT NULL,
-	CalleEntrega VARCHAR(30) NOT NULL,
-	numeroCalleEntrega TINYINT NOT NULL,
-	telefonoEntrega VARCHAR(20) NOT NULL,
-	comentario VARCHAR(200) NULL
+	monto MONEY NULL,
+	fechaVenta DATE NULL,
+	LocalidadEntrega VARCHAR(30) NULL,
+	CalleEntrega VARCHAR(30) NULL,
+	numeroCalleEntrega TINYINT NULL,
+	telefonoEntrega VARCHAR(20) NULL,
+	comentario VARCHAR(200) NULL,
+	estado BIT NOT NULL
 )
+
 CREATE TABLE DetallesDeVentas(
 	IDDetalleVenta BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ID_Venta BIGINT NOT NULL FOREIGN KEY REFERENCES Ventas(IDVenta),
@@ -213,9 +218,11 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION
 			DECLARE @ID_EstadoVenta TINYINT
-			SELECT @ID_EstadoVenta = IDEstadoVenta FROM EstadosVentas WHERE nombreEst='Cancelado'
+			SELECT  @ID_EstadoVenta=IDEstadoVenta FROM EstadosVentas WHERE nombreEst='En carrito'
+			
+			INSERT INTO Ventas(ID_DatosPersonales,ID_EstadoVenta)VALUES
+			(@ID_DatosPersonales,@ID_EstadoVenta)
 
-			INSERT INTO Ventas(ID_DatosPersonales,ID_EstadoVenta)VALUES(@ID_DatosPersonales,@ID_EstadoVenta)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH

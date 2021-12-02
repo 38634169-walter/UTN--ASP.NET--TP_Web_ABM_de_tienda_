@@ -4,29 +4,28 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-                <div class="d-none position-fixed top-50 start-50 translate-middle" id="modal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">No estas registrado</h5>
-                                <asp:LinkButton CssClass="btn btn-close" ID="LinkButton1" runat="server" OnClick="buttonCerrarModal_Click"></asp:LinkButton>
-                            </div>
-                            <div class="modal-body">
-                                <h1>Guardamos tu compra.</h1>
-                                <p>Cuidamos tu compra por eso te pedimos tu registro.</p>
-                                <p>Te registramos facil y rapido.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <asp:LinkButton CssClass="btn btn-success" ID="buttonCerrarModal" runat="server" OnClick="buttonCerrarModal_Click">
-                                    Registrarme
-                                </asp:LinkButton>
-                            </div>
+            
+            <div class="d-none position-fixed top-50 start-50 translate-middle" id="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">No estas registrado</h5>
+                            <asp:LinkButton CssClass="btn btn-close" ID="LinkButton1" runat="server" OnClick="buttonCerrarModal_Click"></asp:LinkButton>
+                        </div>
+                        <div class="modal-body">
+                            <h1>Guardamos tu compra.</h1>
+                            <p>Cuidamos tu compra por eso te pedimos tu registro.</p>
+                            <p>Te registramos facil y rapido.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="login.aspx" CssClass="btn btn-warning" >Ya tengo cuenta</a>
+                            <asp:LinkButton CssClass="btn btn-success" ID="LinkButton2" runat="server" OnClick="buttonCerrarModal_Click">
+                                Registrarme
+                            </asp:LinkButton>
                         </div>
                     </div>
                 </div>
-
-
-
+            </div>
 
             <div class="mt-5">
                 <div class="row">
