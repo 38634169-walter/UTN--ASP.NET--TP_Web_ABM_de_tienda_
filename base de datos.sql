@@ -3,10 +3,6 @@ CREATE DATABASE TIENDA
 GO
 USE TIENDA
 
-select * from Ventas as v
-inner join DetallesDeVentas as dv on dv.ID_Venta=v.IDVenta
-
-
 CREATE TABLE Paises(
 	IDPais SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	nombrePai VARCHAR(30) NOT NULL
@@ -83,6 +79,7 @@ drop TABLE Ventas(
 	IDVenta BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ID_DatosPersonales BIGINT NOT NULL FOREIGN KEY REFERENCES DatosPersonales(IDDatosPersonales),
 	ID_EstadoVenta TINYINT NOT NULL FOREIGN KEY REFERENCES EstadosVentas(IDEstadoVenta),
+	ID_TipoPago TINYINT NULL FOREIGN KEY REFERENCES TiposPagos(IDTipoPago)
 	monto MONEY NULL,
 	fechaVenta DATE NULL,
 	LocalidadEntrega VARCHAR(30) NULL,
@@ -93,13 +90,19 @@ drop TABLE Ventas(
 	estado BIT NOT NULL
 )
 
+CREATE TABLE tiposPagos(
+	IDTipoPago TINYINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nombreTip VARCHAR(15)
+)
+
 CREATE TABLE DetallesDeVentas(
 	IDDetalleVenta BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ID_Venta BIGINT NOT NULL FOREIGN KEY REFERENCES Ventas(IDVenta),
 	ID_Articulo BIGINT NOT NULL FOREIGN KEY REFERENCES Articulos(IDArticulo),
 	cantidad SMALLINT NOT NULL,
+	precioALaFecha MONEY NOT NULL,
+	estado BIT DEFAULT 1
 )
-
 
 -----------------------------------------------------
 -----------------------------------------------------
@@ -172,6 +175,11 @@ INSERT INTO EstadosVentas(nombreEst)VALUES
 ('Recibido'),
 ('Cancelado')
 
+INSERT INTO tiposPagos(nombreTip) VALUES
+('Debito'),
+('Credito'),
+('Cheque'),
+('Efectivo')
 
 ----------------------------------------------------------
 ----------------PROCEDIMIENTOS ALMACENADOS----------------
@@ -230,3 +238,27 @@ BEGIN
 		RAISERROR('No se pudo agregar',16,1)
 	END CATCH
 END
+
+CREATE PROCEDURE ELIMINAR_DETALLE_VENTA (
+	@IDArticulo BIGINT,
+	@IDVenta BIGINT
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			DECLARE @IDDetalleVenta BIGINT
+			SELECT @IDDetalleVenta=IDDetalleVenta FROM DetallesDeVentas WHERE ID_Venta=@IDVenta AND ID_Articulo=@IDArticulo
+			UPDATE DetallesDeVentas SET estado=0 WHERE IDDetalleVenta=@IDDetalleVenta
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('No se pudo dar la baja logica',16,1)
+	END CATCH
+END
+
+------------------------------------------------------------
+--------------------------TRIGGERS--------------------------
+------------------------------------------------------------
+

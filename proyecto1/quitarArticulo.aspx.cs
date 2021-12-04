@@ -15,20 +15,27 @@ namespace proyecto1
         public List<DetalleVenta> detalleVentasList;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null)
             {
-                int id = Convert.ToInt32(Request.QueryString["id"]);
-                detalleVentasList = new List<DetalleVenta>();
-                detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
-                int cont = 0;
-                bool b = false;
-                foreach (var det in detalleVentasList)
-                {
-                    if (det.articulo.id == id) b = true;
-                    if (b == false) cont++;
+                if(Session["articulosAgregados"] != null) { 
+                    int id = Convert.ToInt32(Request.QueryString["id"]);
+                    detalleVentasList = new List<DetalleVenta>();
+                    detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
+                    int cont = 0;
+                    bool b = false;
+                    foreach (var det in detalleVentasList)
+                    {
+                        if (det.articulo.id == id) b = true;
+                        if (b == false) cont++;
+                    }
+                    detalleVentasList.RemoveAt(cont);
+                    Session.Add("articulosAgregados", detalleVentasList);
                 }
-                detalleVentasList.RemoveAt(cont);
-                Session.Add("articulosAgregados",detalleVentasList);
+                else
+                {
+                    DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                    detNego.eliminar(Request.QueryString["id"].ToString(),Session["ventaId"].ToString());
+                }
                 string accion = "eliminado";
                 Response.Redirect("Default.aspx?accion=" + accion);
             }

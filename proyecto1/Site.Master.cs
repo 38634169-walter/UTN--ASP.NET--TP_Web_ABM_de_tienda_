@@ -52,7 +52,7 @@ namespace proyecto1
                         Session.Add("ventaId", venta.id);
                     }
                     DetalleVentaNegocio detNego = new DetalleVentaNegocio();
-                    detalleVentasList = detNego.listar("ventaId", Session["ventaId"].ToString());
+                    detalleVentasList = detNego.listar("ventaId_EnCarrito", Session["ventaId"].ToString());
                 }
                 
             }

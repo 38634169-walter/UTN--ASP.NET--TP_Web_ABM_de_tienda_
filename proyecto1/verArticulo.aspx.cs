@@ -83,7 +83,7 @@ namespace proyecto1
                 usuario = (Usuario)Session["usuario"];
                 ventaId = Session["ventaId"].ToString();
                 DetalleVentaNegocio detNego = new DetalleVentaNegocio();
-                detalleVentaList = detNego.listar("ventaId",ventaId);
+                detalleVentaList = detNego.listar("ventaId_EnCarrito", ventaId);
             }
 
             bool encontrado = false;

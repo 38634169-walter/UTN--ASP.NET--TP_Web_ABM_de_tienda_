@@ -112,6 +112,7 @@
     <Content Include="Content\js\validarLogin.js" />
     <Content Include="Content\js\validarRegistro%28FALTA%29.js" />
     <Content Include="Default.aspx" />
+    <Content Include="detalles-de-venta.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -182,6 +183,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="detalles-de-venta.aspx.cs">
+      <DependentUpon>detalles-de-venta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="detalles-de-venta.aspx.designer.cs">
+      <DependentUpon>detalles-de-venta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
