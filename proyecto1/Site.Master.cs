@@ -32,7 +32,7 @@ namespace proyecto1
                     venNego.agregar(usuario.id.ToString());
                     Venta venta = new Venta();
                     venta = venNego.buscar("ultima venta", usuario.id.ToString());
-                    if(Session["ventaId"] != null) Session.Add("ventaId",venta.id);
+                    if(Session["ventaId"] == null) Session.Add("ventaId",venta.id);
                     foreach(var det in detalleVentasList)
                     {
                         det.venta = new Venta();
@@ -49,10 +49,19 @@ namespace proyecto1
                         Venta venta = new Venta();
                         VentaNegocio venNego = new VentaNegocio();
                         venta = venNego.buscar("ultima venta", usuario.id.ToString());
-                        Session.Add("ventaId", venta.id);
+                        if (venta.id != 0)
+                        {
+                            Session.Add("ventaId", venta.id);
+                            DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                            detalleVentasList = detNego.listar("ventaId_EnCarrito", Session["ventaId"].ToString());
+                            if (detalleVentasList.Count > 0) ScriptManager.RegisterStartupScript(this, typeof(Page), "abrir", "confirmarDesicion('" + "abrir" + "');", true);
+                        }
                     }
-                    DetalleVentaNegocio detNego = new DetalleVentaNegocio();
-                    detalleVentasList = detNego.listar("ventaId_EnCarrito", Session["ventaId"].ToString());
+                    else
+                    {
+                        DetalleVentaNegocio detNego = new DetalleVentaNegocio();
+                        detalleVentasList = detNego.listar("ventaId_EnCarrito", Session["ventaId"].ToString());
+                    }
                 }
                 
             }

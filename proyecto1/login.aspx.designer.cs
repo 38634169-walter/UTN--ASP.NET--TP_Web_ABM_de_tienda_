@@ -15,6 +15,15 @@ namespace proyecto1
     {
 
         /// <summary>
+        /// Control labelUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelUsuario;
+
+        /// <summary>
         /// Control txbUsuario.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace proyecto1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txbUsuario;
+
+        /// <summary>
+        /// Control labelClave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelClave;
 
         /// <summary>
         /// Control txbClave.

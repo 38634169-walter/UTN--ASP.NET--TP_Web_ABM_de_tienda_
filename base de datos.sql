@@ -86,8 +86,7 @@ drop TABLE Ventas(
 	CalleEntrega VARCHAR(30) NULL,
 	numeroCalleEntrega TINYINT NULL,
 	telefonoEntrega VARCHAR(20) NULL,
-	comentario VARCHAR(200) NULL,
-	estado BIT NOT NULL
+	comentario VARCHAR(200) NULL
 )
 
 CREATE TABLE tiposPagos(
@@ -258,7 +257,44 @@ BEGIN
 	END CATCH
 END
 
+SELECT * FROM DetallesDeVentas
+
+SELECT * FROM Ventas
+
+select * from Ventas as v
+INNER JOIN DetallesDeVentas as dv on dv.ID_Venta=v.IDVenta
+
+CREATE PROCEDURE ACTUALIZAR_VENTA_POR_COMPRA(
+	@IDVenta BIGINT,
+	@monto MONEY,
+	@fecha DATE,
+	@localidad VARCHAR(30),
+	@calleEntrega VARCHAR(30),
+	@numeroCalle TINYINT,
+	@telefono VARCHAR(20),
+	@comentario VARCHAR(200),
+	@nombreTipoPago VARCHAR(15)
+)
+AS
+BEGIN 
+	BEGIN TRY
+		BEGIN TRANSACTION
+			DECLARE @IDEstadoVenta TINYINT
+			SELECT @IDEstadoVenta=IDEstadoVenta FROM EstadosVentas WHERE nombreEst='Procesando'
+			DECLARE @IDTipoPago TINYINT
+			SELECT @IDTipoPago=IDTipoPago FROM tiposPagos WHERE nombreTip=@nombreTipoPago
+
+			UPDATE Ventas SET ID_EstadoVenta=@IDEstadoVenta, monto=@monto, fechaVenta=@fecha, localidadEntrega=@localidad, calleEntrega=@calleEntrega, numeroCalleEntrega=@numeroCalle,telefonoEntrega=@telefono, comentario=@comentario,ID_TipoPago=@IDTipoPago WHERE IDVenta=@IDVenta
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('Error al actualizar',16,1)
+	END CATCH
+END
 ------------------------------------------------------------
 --------------------------TRIGGERS--------------------------
 ------------------------------------------------------------
+
+
 

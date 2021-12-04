@@ -13,7 +13,7 @@
                     <h1 class="card-title"> <%: articulo.nombre %></h1>
                     <p class="card-text"> <%: articulo.detalle %></p>
                     <div class="d-flex justify-content-center align-items-center flex-row">
-                        <h1 class="fw-bold">$ <%: articulo.precioEntero %></h1>
+                        <h1 class="fw-bold">$ <%: Convert.ToDecimal(articulo.precioEntero).ToString("N0") %></h1>
                         <h1 class="fw-bold pb-3" style="font-size:20px;"><%: articulo.precioDecimal %></h1>
                     </div>
                     <a class="btn btn-primary px-5" href="verArticulo.aspx?id=<%: articulo.id %>" >Ver</a>

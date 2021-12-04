@@ -9,10 +9,12 @@
                 <div class="d-flex justify-content-center align-items-center flex-column my-3">
                     
                     <div id="usuario">
+                        <asp:Label ID="labelUsuario" runat="server" Text="Usuario:"></asp:Label>
                         <asp:TextBox CssClass="form-control my-2" ID="txbUsuario" runat="server" ClientIDMode="Static"></asp:TextBox>
                         <div></div>
                     </div>
                     <div id="clave">    
+                        <asp:Label ID="labelClave" runat="server" Text="Contraseña: "></asp:Label>
                         <asp:TextBox CssClass="form-control my-2" ID="txbClave" runat="server" ClientIDMode="Static" TextMode="Password"></asp:TextBox>
                         <div></div>    
                     </div>

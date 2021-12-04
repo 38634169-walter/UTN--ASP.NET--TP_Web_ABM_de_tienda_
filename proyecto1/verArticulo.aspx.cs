@@ -39,6 +39,15 @@ namespace proyecto1
                 detalleVenta.articulo = new Articulo();
                 detalleVenta.articulo = articulo;
                 if(Session["usuario"] != null) {
+                    if (Session["ventaId"] == null)
+                    {
+                        VentaNegocio venNego = new VentaNegocio();
+                        Usuario usuario=(Usuario)Session["usuario"];
+                        venNego.agregar(usuario.id.ToString());
+                        Venta venta = new Venta();
+                        venta = venNego.buscar("ultima venta", usuario.id.ToString());
+                        Session.Add("ventaId",venta.id);
+                    }
                     detalleVenta.venta = new Venta();
                     detalleVenta.venta.id =Convert.ToInt32(Session["ventaId"]);
                     DetalleVentaNegocio detNego = new DetalleVentaNegocio();
@@ -76,8 +85,9 @@ namespace proyecto1
 
         public bool validar_producto_existente()
         {
+            detalleVentaList = new List<DetalleVenta>();
             if (Session["articulosAgregados"] != null) detalleVentaList = (List<DetalleVenta>)Session["articulosAgregados"];
-            if(Session["usuario"] != null)
+            if(Session["usuario"] != null && Session["ventaId"] != null)
             {
                 Usuario usuario = new Usuario();
                 usuario = (Usuario)Session["usuario"];

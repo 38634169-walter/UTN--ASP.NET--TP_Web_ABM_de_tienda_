@@ -36,8 +36,7 @@ namespace proyecto1
                     DetalleVentaNegocio detNego = new DetalleVentaNegocio();
                     detNego.eliminar(Request.QueryString["id"].ToString(),Session["ventaId"].ToString());
                 }
-                string accion = "eliminado";
-                Response.Redirect("Default.aspx?accion=" + accion);
+                Response.Redirect("Default.aspx?accion=" + "eliminado");
             }
         }
     }

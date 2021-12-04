@@ -105,7 +105,7 @@
                                 <strong class="text-light" >Nombre: <%: det.articulo.nombre %></strong> 
                                 <div class="d-flex justify-content-center align-items-center flex-row">
                                     <strong class="text-light pe-2">Precio: </strong>
-                                    <strong class="text-light" style="font-size:15px;">$ <%: det.articulo.precioEntero %> </strong>
+                                    <strong class="text-light" style="font-size:15px;">$ <%: Convert.ToDecimal(det.articulo.precioEntero).ToString("N0") %> </strong>
                                     <strong class="text-light pb-1" style="font-size:11px;"><%: det.articulo.precioDecimal %></strong>
                                 </div>
                                 <strong class="text-light" >Cantidad: <%: det.cantidad %></strong> 
@@ -137,7 +137,7 @@
             <hr />
         </div>
         <script src="Content/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="Content/js/confirmaciones.js"></script>
+        <script src="Content/js/confirmacion.js"></script>
         <script src="Content/js/modalAbrirCerrar.js"></script>
     </form>
 </body>

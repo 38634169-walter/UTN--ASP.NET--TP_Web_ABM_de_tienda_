@@ -107,10 +107,11 @@
   <ItemGroup>
     <Content Include="busqueda.aspx" />
     <Content Include="carrito.aspx" />
-    <Content Include="Content\js\confirmaciones.js" />
+    <Content Include="Content\js\confirmacion.js" />
     <Content Include="Content\js\modalAbrirCerrar.js" />
+    <Content Include="Content\js\validarCompra.js" />
     <Content Include="Content\js\validarLogin.js" />
-    <Content Include="Content\js\validarRegistro%28FALTA%29.js" />
+    <Content Include="Content\js\validarRegistro.js" />
     <Content Include="Default.aspx" />
     <Content Include="detalles-de-venta.aspx" />
     <Content Include="favicon.ico" />

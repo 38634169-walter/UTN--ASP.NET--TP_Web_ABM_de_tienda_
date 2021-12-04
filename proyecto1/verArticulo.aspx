@@ -42,7 +42,7 @@
                     <p><strong>Sub Categoria: </strong><%: articulo.subCategoria.nombre%></p>
                     <p><strong>Categoria: </strong><%: articulo.subCategoria.categoria.nombre %></p>
                     <div class="d-flex justify-content-start align-items-center flex-row">
-                        <strong class="fw-bold h1">$ <%: articulo.precioEntero %> </strong>
+                        <strong class="fw-bold h1">$ <%: Convert.ToDecimal(articulo.precioEntero).ToString("N0") %> </strong>
                         <strong class="pb-3" style="font-size: 15px;"><%: articulo.precioDecimal %></strong>
                     </div>
 
