@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
 
-    <div class="d-none position-fixed top-50 start-50 translate-middle shadow" style="z-index:999" id="modal">
+    <div class="d-none position-fixed top-50 start-50 translate-middle" style="z-index:999" id="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -15,8 +15,8 @@
                     <p>Para que no pierdas tu compra anterior dejamos tus productos en el carrito.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="" CssClass="btn btn-warning" >Gracias</a>
-                    <asp:LinkButton CssClass="btn btn-success" ID="LinkButton2" runat="server">
+                    <asp:LinkButton CssClass="btn btn-success text-decoration-none" ID="LinkButton2" runat="server">Continuar compra anterior</asp:LinkButton>
+                    <asp:LinkButton CssClass="btn btn-danger" ID="buttonVaciarCarrito" runat="server" OnClick="buttonVaciarCarrito_Click">
                         Vaciar mi carrito
                     </asp:LinkButton>
                 </div>

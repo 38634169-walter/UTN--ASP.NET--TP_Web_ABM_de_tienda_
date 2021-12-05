@@ -27,7 +27,7 @@ namespace proyecto1
                 ventasList = new List<Venta>();
                 ventasList=venNego.listar("delUsuarioTodo", usuario.id.ToString());
             }
-            if (Request.QueryString["comprado"] != null) ScriptManager.RegisterStartupScript(this, typeof(Page), "comprado", "comprado();", true);
+            if (Request.QueryString["comprado"] != null && !IsPostBack) ScriptManager.RegisterStartupScript(this, typeof(Page), "comprado", "comprado();", true);
         }
 
         protected void cerrarSesion_Click(object sender, EventArgs e)
