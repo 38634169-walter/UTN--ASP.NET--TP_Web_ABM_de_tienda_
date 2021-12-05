@@ -4,16 +4,34 @@
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
     <style>
-        li{
-            list-style:none;
+        body {
+            overflow-x: hidden;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
         }
-        a{
-            text-decoration:none;
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .titulo1 {
+            font-family: 'Abril Fatface', cursive;
+        }
+
+        #subCategoriasContainer {
+            display: none;
+            background: rgb(250, 215, 160 );
+            margin-top: -17px;
         }
     </style>
 
@@ -21,7 +39,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- BOOTSTRAP 5-->
     <link href="~/Content/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,7 +47,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <!--Sweet alert 2-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <!--Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 </head>
 <body>
     <form runat="server">
@@ -52,11 +73,10 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
 
                 <%--Site Scripts--%>
-
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-gradient bg-dark position-fixed w-100 d-flex flex-column" style="z-index:2;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-gradient bg-dark position-fixed w-100 d-flex flex-column" style="z-index: 9999;">
             <div class="container-fluid">
                 <a class="navbar-brand text-light" href="Default">Mi tienda</a>
                 <ul class="d-flex justify-content-center align-items-center pt-3">
@@ -73,7 +93,7 @@
                         <i class="fas fa-user text-dark rounded-circle bg-light px-3 py-2"></i>
                         <asp:Label ID="labelUsuario" runat="server" Text="" CssClass="text-light me-2 fw-bold text-decoration-none"></asp:Label>
                     </asp:LinkButton>
-                    
+
                 </ul>
             </div>
             <ul class="collapse p-3 w-100" id="buscador">
@@ -82,63 +102,92 @@
                     <asp:Button class="btn btn-success mt-2" ID="Button1" runat="server" OnClick="Button1_Click" Text="Buscar" />
                 </div>
             </ul>
-            <ul class="collapse w-100 pb-5" style="max-height:50vh;overflow-y:scroll;" id="carrito">
-                <p class="h1 text-light fw-bold text-center" >En mi carrito</p>
+            <ul class="collapse w-100 pb-5" style="max-height: 50vh; overflow-y: scroll;" id="carrito">
+                <p class="h1 text-light fw-bold text-center">En mi carrito</p>
                 <div class="d-flex justify-content-center align-items-center">
                     <i class="fas fa-shopping-cart text-dark bg-light rounded-circle h1 p-4"></i>
                 </div>
 
                 <% if (detalleVentasList.Any())
-                    { 
-                        %>
+                    {
+                %>
 
-                        <asp:LinkButton CssClass="btn bg-success text-light d-flex justify-content-center align-items-center flex-row" style="margin-top:-2cm;width:15rem;height:2cm;" ID="buttonComprar" runat="server" OnClick="buttonComprar_Click">
+                <asp:LinkButton CssClass="btn bg-success text-light d-flex justify-content-center align-items-center flex-row" Style="margin-top: -2cm; width: 15rem; height: 2cm;" ID="buttonComprar" runat="server" OnClick="buttonComprar_Click">
                             <i class="fas fa-shipping-fast h3"></i>
                             <p class="ps-2 h3">Comprar</p>
-                        </asp:LinkButton>
-                    <% foreach (var det in detalleVentasList)
-                        { %>
-                        <div class="d-flex justify-content-start align-content-center flex-row border border-light border-end-0 border-start-0 my-2 py-2">
-                            <img class="mx-2" src="<%: !(string.IsNullOrEmpty(det.articulo.imagen1)) ? det.articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
-                            
-                            <div class="d-flex justify-content-center align-items-start flex-column">
-                                <strong class="text-light" >Nombre: <%: det.articulo.nombre %></strong> 
-                                <div class="d-flex justify-content-center align-items-center flex-row">
-                                    <strong class="text-light pe-2">Precio: </strong>
-                                    <strong class="text-light" style="font-size:15px;">$ <%: Convert.ToDecimal(det.articulo.precioEntero).ToString("N0") %> </strong>
-                                    <strong class="text-light pb-1" style="font-size:11px;"><%: det.articulo.precioDecimal %></strong>
-                                </div>
-                                <strong class="text-light" >Cantidad: <%: det.cantidad %></strong> 
-                            </div>
+                </asp:LinkButton>
+                <% foreach (var det in detalleVentasList)
+                    { %>
+                <div class="d-flex justify-content-start align-content-center flex-row border border-light border-end-0 border-start-0 my-2 py-2">
+                    <img class="mx-2" src="<%: !(string.IsNullOrEmpty(det.articulo.imagen1)) ? det.articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
 
-                            <div class=" position-relative">
-                                <a href="quitarArticulo.aspx?id= <%: det.articulo.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row" >Quitar</a>
-                            </div>
+                    <div class="d-flex justify-content-center align-items-start flex-column">
+                        <strong class="text-light">Nombre: <%: det.articulo.nombre %></strong>
+                        <div class="d-flex justify-content-center align-items-center flex-row">
+                            <strong class="text-light pe-2">Precio: </strong>
+                            <strong class="text-light" style="font-size: 15px;">$ <%: Convert.ToDecimal(det.articulo.precioEntero).ToString("N0") %> </strong>
+                            <strong class="text-light pb-1" style="font-size: 11px;"><%: det.articulo.precioDecimal %></strong>
                         </div>
+                        <strong class="text-light">Cantidad: <%: det.cantidad %></strong>
+                    </div>
 
-                    <% } %>
+                    <div class=" position-relative">
+                        <a href="quitarArticulo.aspx?id= <%: det.articulo.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row">Quitar</a>
+                    </div>
+                </div>
+
+                <% } %>
                 <% }
                     else
                     { %>
-                        <h1 class="text-center"><i class="fas fa-box-open"></i> No hay articulos agregados hasta el momento</h1>
+                <h1 class="text-center"><i class="fas fa-box-open"></i>No hay articulos agregados hasta el momento</h1>
                 <%} %>
-                
             </ul>
         </nav>
-        <div class="container body-content pt-5 ">
-            <br />
-            <div class="myDiv"></div>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" ClientIDMode="Static">
-                
-            </asp:ContentPlaceHolder>
-         
-         
 
-            <hr />
+
+
+        <div class="d-flex justify-content-center align-items-center flex-column mb-0" style="padding-top: 85px;">
+            <div class="bg-warning w-100 text-center">
+                <h1 class="titulo1 text-light">Categorias</h1>
+            </div>
+
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+
+            <div class="d-flex justify-content-center align-items-center flex-column py-0">
+                <ul class=" d-flex flex-wrap justify-content-center align-items-center bg-warning vw-100 submenuButtons">
+                    <div>
+                        <asp:LinkButton CssClass="mb-0 me-2 p-1 h-100 p-0 text-decoration-none" ID="buttonElectrodomesticos" runat="server" OnClientClick="cambiar_color()" OnClick="buttonElectrodomesticos_Click">
+                            <i class="fas fa-tv"></i>
+                            Electrodomesticos
+                        </asp:LinkButton>
+                    </div>
+                    <div>
+                        <asp:LinkButton CssClass="mb-0 p-1 h-100 text-decoration-none" ID="buttonRopa" runat="server" OnClick="buttonRopa_Click">
+                            <i class="fas fa-tshirt"></i>
+                            Ropa
+                        </asp:LinkButton>
+                    </div>
+                </ul>
+                <ul class="w-100 d-flex justify-content-center align-items-start flex-column" id="subCategoriasContainer" runat="server">
+                    <% foreach (var subCategoria in subCategoriasList)
+                        {%>
+                    <a class="text-decoration-none m-0 ps-4 py-2" href="sub-categoria.aspx?id=<%: subCategoria.id %>"><strong class="text-dark ms-5">> <%: subCategoria.nombre %></strong></a>
+                    <%}%>
+                </ul>
+            </div>
         </div>
-        <script src="Content/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="Content/js/confirmacion.js"></script>
-        <script src="Content/js/modalAbrirCerrar.js"></script>
+
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" ClientIDMode="Static">
+            </asp:ContentPlaceHolder>
+
+            <script src="Content/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="Content/js/confirmacion.js"></script>
+            <script src="Content/js/modalAbrirCerrar.js"></script>
     </form>
 </body>
 </html>

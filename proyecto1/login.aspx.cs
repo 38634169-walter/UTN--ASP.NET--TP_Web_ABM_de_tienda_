@@ -15,11 +15,11 @@ namespace proyecto1
         public Usuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void buttonIngresar_Click(object sender, EventArgs e)
         {
+            labelError.Text = "";
             UsuarioNegocio usuNego = new UsuarioNegocio();
             usuario = new Usuario();
             usuario=usuNego.buscar("usuarioClave", txbUsuario.Text,txbClave.Text);
@@ -27,6 +27,10 @@ namespace proyecto1
             {
                 Session.Add("usuario",usuario);
                 Response.Redirect("Default.aspx");
+            }
+            else
+            {
+                labelError.Text = "*Usuario y/o contraseña incorrecto";
             }
         }
     }

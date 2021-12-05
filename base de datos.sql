@@ -132,14 +132,16 @@ INSERT INTO SubCategorias(ID_Categoria,nombreSub) VALUES
 (2,'Shorts')
 
 INSERT INTO Articulos(ID_SubCategoria,ID_Marca,nombreArt,precio,detalles,imagen1,imagen2,imagen3) VALUES
-(1,1,'Licuadora Liliana',3600.99,'Liquadora Liliana los mejores liquados de tu vida, asegurado.','/Content/img/Liquadoras/1_1.webp','/Content/img/Liquadoras/1_2.webp','/Content/img/Liquadoras/1_3.webp'),
-(1,2,'Liquadora Mondial',3200.50,'Liquadora Mondial te corta hasta las ganas de vivir.','/Content/img/Liquadoras/2_1.webp','/Content/img/Liquadoras/2_2.webp','/Content/img/Liquadoras/2_3.webp'),
-(2,1,'Zapatillas Tascani2',6700.99,'Zapatillas Tascani con estas quedas bien donde vayas.','/Content/img/Zapatillas/1_1.webp','/Content/img/Zapatillas/1_2.webp','/Content/img/Zapatillas/1_3.webp'),
-(2,1,'Zapatillas Tascani',6200.99,'Zapatillas Tascani nunca vas a tener los pies tan comodos.','/Content/img/Zapatillas/2_1.webp','/Content/img/Zapatillas/2_2.webp','/Content/img/Zapatillas/2_3.webp'),
+(1,1,'Licuadora Liliana',3600.99,'Liquadora Liliana los mejores liquados de tu vida, asegurado.','/Content/img/Liquadoras/1_1.jpg','/Content/img/Liquadoras/1_2.jpg','/Content/img/Liquadoras/1_3.jpg'),
+(1,2,'Liquadora Mondial',3200.50,'Liquadora Mondial te corta hasta las ganas de vivir.','/Content/img/Liquadoras/2_1.jpg','/Content/img/Liquadoras/2_2.jpg','/Content/img/Liquadoras/2_3.jpg'),
+(2,1,'Zapatillas Tascani2',6700.99,'Zapatillas Tascani con estas quedas bien donde vayas.','/Content/img/Zapatillas/1_1.jpg','/Content/img/Zapatillas/1_2.jpg','/Content/img/Zapatillas/1_3.jpg'),
+(2,1,'Zapatillas Tascani',6200.99,'Zapatillas Tascani nunca vas a tener los pies tan comodos.','/Content/img/Zapatillas/2_1.jpg','/Content/img/Zapatillas/2_2.jpg','/Content/img/Zapatillas/2_3.jpg'),
 (2,2,'Zapatillas Nike',5200.00,'Zapatillas Nike con estas no hizo goles messi pero vos los vas a hacer.','/Content/img/Zapatillas/3_1.jpg','/Content/img/Zapatillas/3_2.jpg','/Content/img/Zapatillas/3_3.jpg'),
 (3,2,'Caloventor Mondial',5200.00,'Calovetor Mondial muy caliente para invierno.','/Content/img/Caloventores/1_1.jpg','/Content/img/Caloventores/1_2.jpg','/Content/img/Caloventores/1_3.jpg'),
 (3,1,'Caloventor Liliana',6200.99,'Calovetor Liliana mas caliente que cualquier otro.','/Content/img/Caloventores/2_1.jpg','/Content/img/Caloventores/2_2.jpg','/Content/img/Caloventores/2_3.jpg'),
 (4,1,'Shortcito espectacular',2200.99,'Short Tascani si te lo pone no te lo sacas mas.','/Content/img/Shorts/1_1.jpg','/Content/img/Shorts/1_2.jpg','/Content/img/Shorts/1_3.jpg')
+
+
 
 INSERT INTO Stocks (IDStock,cantidad) VALUES
 (1,100),
@@ -257,12 +259,6 @@ BEGIN
 	END CATCH
 END
 
-SELECT * FROM DetallesDeVentas
-
-SELECT * FROM Ventas
-
-select * from Ventas as v
-INNER JOIN DetallesDeVentas as dv on dv.ID_Venta=v.IDVenta
 
 CREATE PROCEDURE ACTUALIZAR_VENTA_POR_COMPRA(
 	@IDVenta BIGINT,

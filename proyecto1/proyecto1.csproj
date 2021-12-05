@@ -121,6 +121,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="categorias.asmx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="login.aspx" />
     <Content Include="perfil.aspx" />
@@ -155,6 +156,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="sub-categoria.aspx" />
     <Content Include="verArticulo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -238,6 +240,13 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="sub-categoria.aspx.cs">
+      <DependentUpon>sub-categoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sub-categoria.aspx.designer.cs">
+      <DependentUpon>sub-categoria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="verArticulo.aspx.cs">
       <DependentUpon>verArticulo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -251,6 +260,10 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="categorias.asmx.cs">
+      <DependentUpon>categorias.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

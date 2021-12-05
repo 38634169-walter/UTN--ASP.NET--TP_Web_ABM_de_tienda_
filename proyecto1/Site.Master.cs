@@ -13,12 +13,19 @@ namespace proyecto1
     public partial class SiteMaster : MasterPage
     {
         public List<DetalleVenta> detalleVentasList;
+        public static List<SubCategoria> subCategoriasList;
+        public List<Categoria> categoriasList;
         public Articulo art;
         public static Usuario usuario;
         public string ventaId;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack) subCategoriasList = new List<SubCategoria>();
             detalleVentasList = new List<DetalleVenta>();
+            categoriasList = new List<Categoria>();
+            CategoriaNegocio catNego = new CategoriaNegocio();
+            categoriasList=catNego.listar();
+
             if (Session["usuario"] != null)
             {
                 usuario = new Usuario();
@@ -32,8 +39,8 @@ namespace proyecto1
                     venNego.agregar(usuario.id.ToString());
                     Venta venta = new Venta();
                     venta = venNego.buscar("ultima venta", usuario.id.ToString());
-                    if(Session["ventaId"] == null) Session.Add("ventaId",venta.id);
-                    foreach(var det in detalleVentasList)
+                    if (Session["ventaId"] == null) Session.Add("ventaId", venta.id);
+                    foreach (var det in detalleVentasList)
                     {
                         det.venta = new Venta();
                         det.venta.id = venta.id;
@@ -63,9 +70,9 @@ namespace proyecto1
                         detalleVentasList = detNego.listar("ventaId_EnCarrito", Session["ventaId"].ToString());
                     }
                 }
-                
+
             }
-            if(Session["articulosAgregados"] != null) detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
+            if (Session["articulosAgregados"] != null) detalleVentasList = (List<DetalleVenta>)Session["articulosAgregados"];
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -87,6 +94,34 @@ namespace proyecto1
                 Response.Redirect("perfil.aspx");
             }
             Response.Redirect("login.aspx");
+        }
+
+        protected void buttonElectrodomesticos_Click(object sender, EventArgs e)
+        {
+            Categoria categoria = new Categoria();
+            CategoriaNegocio catNego = new CategoriaNegocio();
+            categoria=catNego.buscar("nombreCategoria", "Electrodomesticos");
+            SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
+            subCategoriasList = new List<SubCategoria>();
+            subCategoriasList=subCatNego.listar("categoriaId",categoria.nombre.ToString());
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "cambiarColor", "cambiar_color();", true);
+            buttonRopa.Style.Remove("background");
+            buttonElectrodomesticos.Style.Add("background", "rgb(250, 215, 160 )");
+            subCategoriasContainer.Style.Add("display", "block");
+        }
+
+        protected void buttonRopa_Click(object sender, EventArgs e)
+        {
+            Categoria categoria = new Categoria();
+            CategoriaNegocio catNego = new CategoriaNegocio();
+            categoria = catNego.buscar("nombreCategoria", "Ropa");
+            SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
+            subCategoriasList = new List<SubCategoria>();
+            subCategoriasList = subCatNego.listar("categoriaId", categoria.nombre.ToString());
+            
+            buttonElectrodomesticos.Style.Remove("background");
+            buttonRopa.Style.Add("background", "rgb(250, 215, 160 )");
+            subCategoriasContainer.Style.Add("display", "block");
         }
     }
 }

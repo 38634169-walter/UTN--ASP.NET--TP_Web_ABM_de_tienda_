@@ -11,7 +11,6 @@
                 <img class="card-img-top" height="255px" src="<%: !(string.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>"/>
                 <div class="card-body d-flex justify-content-center align-items-center flex-column">
                     <h1 class="card-title"> <%: articulo.nombre %></h1>
-                    <p class="card-text"> <%: articulo.detalle %></p>
                     <div class="d-flex justify-content-center align-items-center flex-row">
                         <h1 class="fw-bold">$ <%: Convert.ToDecimal(articulo.precioEntero).ToString("N0") %></h1>
                         <h1 class="fw-bold pb-3" style="font-size:20px;"><%: articulo.precioDecimal %></h1>

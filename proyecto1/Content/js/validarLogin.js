@@ -6,10 +6,10 @@ function validar_login() {
     for (var i = 0; i < usu.length; i++) {
         if (usu[i] == "=" || usu[i] == "?") {
             validarCampo = false;
-            $('#usuario div').html('*Caracteres no permitidos \' = ? \' ');
+            $('#usuario div').html('*Caracteres no permitidos');
         }
     }
-    if (usu === "" || validarCampo == false) {
+    if (usu == "" || validarCampo == false) {
         $('#txbUsuario').removeClass('is-valid');
         $('#txbUsuario').addClass('is-invalid');
         $('#usuario div').addClass('invalid-feedback');
@@ -31,7 +31,7 @@ function validar_login() {
             $('#clave div').html('*Caracteres no permitidos');
         }
     }
-    if (cla === "" || validarCampo == false) {
+    if (cla == "" || validarCampo == false) {
         $('#txbClave').removeClass('is-valid');
         $('#txbClave').addClass('is-invalid');
         $('#clave div').addClass('invalid-feedback');

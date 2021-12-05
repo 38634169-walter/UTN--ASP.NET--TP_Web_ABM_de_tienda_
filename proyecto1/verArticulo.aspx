@@ -2,12 +2,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+   <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
 
-            <h1 class="text-center shadow bg-dark p-3 text-light rounded-circle mt-5"><%: articulo.nombre %></h1>
-
-            <div class="d-none position-fixed top-50 start-50 translate-middle" id="modal">
+            <h1 class="text-center shadow bg-dark p-3 text-light rounded-circle"><%: articulo.nombre %></h1>
+            
+            <div class="d-none position-fixed top-50 start-50 translate-middle my-5" id="modal">
                     <div class="modal-dialog">
                         <div class="modal-content bg-secondary">
                             <div class="modal-header">
@@ -28,14 +29,12 @@
                             </div>
                         </div>
                 </div>
-
             </div>
-            <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column">
+            <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column my-5">
                 <div class="w-20 me-3">
                     <img src="<%: !(string.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="300px" height="300px" />
                 </div>
                 <div>
-                    <p><strong>Descripcion: </strong><%: articulo.detalle %></p>
                     <p><strong>Marca: </strong><%: articulo.marca.nombre %></p>
 
 
@@ -63,6 +62,13 @@
                     </asp:LinkButton>
                 </div>
             </div>
+            <hr />
+                <div class="ms-5">
+                    <h1> Detalles especiales: </h1>
+                    <p> <%: articulo.detalle %></p>
+                </div>
+            <hr />
+
         </ContentTemplate>
     </asp:UpdatePanel>
 

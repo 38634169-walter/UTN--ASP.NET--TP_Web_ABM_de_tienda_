@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
             
             <div class="d-none position-fixed top-50 start-50 translate-middle" id="modal">
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-2">
                     </div>
-                    <div class="col-8 bg-gradient bg-info d-flex justify-content-center align-items-center flex-row py-4 my-3 rounded-3">
+                    <div class="col-8 bg-gradient bg-secondary d-flex justify-content-center align-items-center flex-row py-4 my-3 rounded-3">
                         <div class="d-flex justify-content-center align-items-center flex-column mx-1">
                             <div id="nombre" class="my-1 d-flex justify-content-center align-items-start flex-column">
                                 <asp:Label ID="LabelNombre" runat="server" Text="Nombre: "></asp:Label>
@@ -58,7 +58,7 @@
                             </div>
                             <div id="sexo" class="my-1 d-flex justify-content-center align-items-start flex-column">
                                 <asp:Label ID="LabelSexo" runat="server" Text="Sexo: "></asp:Label>
-                                <asp:DropDownList CssClass=" form-select" ID="dropSexo" runat="server" ClientIDMode="Static"></asp:DropDownList>
+                                <asp:DropDownList CssClass="form-select" ID="dropSexo" runat="server" ClientIDMode="Static"></asp:DropDownList>
                                 <div></div>
                             </div>
                             <div id="codigoPostal" class="my-1 d-flex justify-content-center align-items-start flex-column">
@@ -77,7 +77,7 @@
                     <div class="col-2">
                     </div>
 
-                    <div class="col-8 bg-gradient bg-info d-flex justify-content-center align-items-center flex-column py-4 my-3 rounded-3">
+                    <div class="col-8 bg-gradient bg-secondary d-flex justify-content-center align-items-center flex-column py-4 my-3 rounded-3">
                         <div class="d-flex justify-content-center align-items-center flex-row">
 
                             <div class="d-flex justify-content-center align-items-center flex-column mx-1">
