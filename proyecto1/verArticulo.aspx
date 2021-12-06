@@ -1,12 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="verArticulo.aspx.cs" Inherits="proyecto1.verArticulo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
 
-
-   <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-        <ContentTemplate>
-
-            <h1 class="text-center shadow bg-dark p-3 text-light rounded-circle"><%: articulo.nombre %></h1>
+            <div class="pt-4 mx-2">
+                <h1 class="text-center shadow bg-dark p-3 text-light rounded-circle bajoMenu" ><%: articulo.nombre %></h1>
+            </div>
             
             <div class="d-none position-fixed top-50 start-50 translate-middle my-5" id="modal">
                     <div class="modal-dialog">
@@ -30,9 +29,9 @@
                         </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column my-5">
+            <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column mb-3">
                 <div class="w-20 me-3">
-                    <img src="<%: !(string.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="300px" height="300px" />
+                    <img src="<%: !(string.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" class="imagenVer" />
                 </div>
                 <div>
                     <p><strong>Marca: </strong><%: articulo.marca.nombre %></p>
@@ -45,6 +44,8 @@
                         <strong class="pb-3" style="font-size: 15px;"><%: articulo.precioDecimal %></strong>
                     </div>
 
+   <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+        <ContentTemplate>
                     <div>
                         <asp:LinkButton CssClass="btn bg-primary text-light px-2" ID="buttonMenos" runat="server" OnClick="buttonMenos_Click">
                                     <i class="fas fa-minus"></i>
@@ -53,7 +54,10 @@
                         <asp:LinkButton CssClass="btn bg-primary text-light px-2" ID="buttonMas" runat="server" OnClick="buttonMas_Click">
                                     <i class="fas fa-plus"></i>
                         </asp:LinkButton>
+
                     </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 
                     <asp:LinkButton CssClass="btn btn-primary p-2 d-flex justify-content-center align-items-center mt-2" ID="ButtonAgregar" runat="server" OnClick="ButtonAgregar_Click">
@@ -68,9 +72,5 @@
                     <p> <%: articulo.detalle %></p>
                 </div>
             <hr />
-
-        </ContentTemplate>
-    </asp:UpdatePanel>
-
 
 </asp:Content>

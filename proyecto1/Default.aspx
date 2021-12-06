@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
 
-    <div class="d-none position-fixed top-50 start-50 translate-middle" style="z-index: 999" id="modal">
+    <div class="d-none position-fixed top-50 start-50 translate-middle w-75" style="z-index: 999999" id="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -24,10 +24,10 @@
         </div>
     </div>
 
-    <div class="bg-warning">
+    <div class="fondo1">
 
 
-        <div id="carouselExampleIndicators" class="carousel slide vw-100 p-0" data-bs-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide vw-100 bajoMenu"  data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -56,17 +56,48 @@
 
 
 
+        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+            <ContentTemplate>
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <div class="bg-warning w-100 text-center py-1">
+                        <h5 class="titulo1 text-light">Categorias</h5>
+                    </div>
+                </div>
+
+
+                 <div class=" d-flex justify-content-center align-items-start flex-column ps-4 py-2 m-0" style="background:rgb(241, 233, 163)">
+                     <div class="d-flex justify-content-center align-items-start flex-column">
+                         <asp:LinkButton CssClass="h6 text-decoration-none text-dark fw-bold" ID="buttonElectrodomesticos" ClientIDMode="Static" runat="server" OnClick="buttonElectrodomesticos_Click">
+                             <i class="fas fa-tv"></i>
+                             Electrodomestricos
+                         </asp:LinkButton>
+                         <asp:Label ID="labelElectrodomesticos" runat="server" Text=""></asp:Label>           
+                     </div>
+                     <div class="d-flex justify-content-center align-items-start flex-column">
+                         <asp:LinkButton CssClass="h6 text-decoration-none text-dark fw-bold" ID="buttonRopa" ClientIDMode="Static" runat="server" OnClick="buttonRopa_Click">
+                             <i class="fas fa-tshirt"></i>
+                             Ropa
+                         </asp:LinkButton>
+                         <asp:Label ID="labelRopa" ClientIDMode="Static" runat="server" Text=""></asp:Label>           
+                     </div>                
+                 </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+
         <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="z-index: 1;">
             <% foreach (var articulo in articuloList)
                 { %>
-            <div class="card m-2" style="width: 18rem;" height="200px">
+            <div class="card m-2 shadow" style="width: 18rem;" height="200px">
                 <img src="<%: !(String.IsNullOrEmpty(articulo.imagen1)) ? articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" alt="" height="255px">
-                <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                <div class="card-body d-flex justify-content-center align-items-start flex-column">
                     <h5 class="card-title"><%: articulo.nombre %></h5>
                     <div class="d-flex justify-content-center align-items-center flex-row">
-                        <h1 class="fw-bold">$ <%: Convert.ToDecimal(articulo.precioEntero).ToString("N0") %></h1>
-                        <h1 class="fw-bold pb-3" style="font-size: 20px;"><%: articulo.precioDecimal %></h1>
+                        <h2 class="fw-bold">$ <%: Convert.ToDecimal(articulo.precioEntero).ToString("N0") %></h2>
+                        <h2 class="fw-bold pb-3" style="font-size: 20px;"><%: articulo.precioDecimal %></h2>
                     </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column my-2">
                     <a href=" verArticulo.aspx?id=<%: articulo.id %>" class="btn btn-primary px-5">Ver</a>
                 </div>
             </div>

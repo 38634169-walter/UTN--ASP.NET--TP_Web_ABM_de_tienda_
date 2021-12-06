@@ -23,6 +23,10 @@ namespace proyecto1
                 detalleVentaList = new List<DetalleVenta>();
                 detalleVentaList=venNego.listar("ventaId_EnCarrito", Session["ventaId"].ToString());
             }
+            else
+            {
+                Response.Redirect("login.aspx");
+            }
             if (!IsPostBack)
             {
                 total = 0;

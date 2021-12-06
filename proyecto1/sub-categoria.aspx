@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="sub-categoria.aspx.cs" Inherits="proyecto1.sub_categoria" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="z-index: 1;">
+    <div class="d-flex flex-wrap justify-content-center align-items-center pt-5 bajoMenu" style="z-index: 1;">
             <% foreach (var articulo in articulosList)
                 { %>
             <div class="card m-2" style="width: 18rem;">
@@ -16,6 +16,6 @@
                 </div>
             </div>
             <% } %>
-        </div>
+    </div>
 
 </asp:Content>

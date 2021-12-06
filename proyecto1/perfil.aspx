@@ -1,13 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="perfil.aspx.cs" Inherits="proyecto1.perfil" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
         <ContentTemplate>
 
-            
-            <div class="d-flex justify-content-center align-items-start flex-column my-4 bg-dark border-5 rounded-3 p-4 mt-5 shadow">
-                <h1 class="text-light"> Bienvenido <%: usuario.nombre %> <%: usuario.apellido %></h1>
-                <asp:Button CssClass="text-primary border-0 bg-transparent" ID="cerrarSesion" runat="server" Text="(Cerrar sesion)" OnClick="cerrarSesion_Click" />
+            <div class="bajoMenu pt-4">
+                <div class="d-flex justify-content-center align-items-start flex-column my-4 bg-dark border-5 rounded-3 p-4 shadow mx-2">
+                    <h1 class="text-light"> Bienvenido <%: usuario.nombre %> <%: usuario.apellido %></h1>
+                    <asp:Button CssClass="text-primary border-0 bg-transparent" ID="cerrarSesion" runat="server" Text="(Cerrar sesion)" OnClick="cerrarSesion_Click" />
+                </div>
             </div>
 
             <div>

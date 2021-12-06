@@ -4,14 +4,15 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
-            
-            <div class="d-flex justify-content-center align-items-start flex-sm-row flex-column my-4 bg-dark border-5 rounded-3 p-4 mt-5 shadow">
-                <div class="d-flex justify-content-center align-items-center ">
-                    <i class="fas fa-shipping-fast text-light" style="font-size:140px;"></i>
-                </div>
-                <div class="d-flex justify-content-center align-items-start flex-column text-light ps-4">
-                    <h1> <%: usuario.nombre %>, estas a un paso de completar tu compra</h1>
-                    <p>Nos agrada que confies en nosotros para llevar tus objetivos adelante</p>
+            <div class="bajoMenu pt-4">
+                <div class="d-flex justify-content-center align-items-start flex-sm-row flex-column bg-dark rounded-3 p-4 my-4 mx-2">
+                    <div class="d-flex justify-content-center align-items-center ">
+                        <i class="fas fa-shipping-fast text-light" style="font-size:140px;"></i>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-start flex-column text-light ps-4">
+                        <h1> <%: usuario.nombre %>, estas a un paso de completar tu compra</h1>
+                        <p>Nos agrada que confies en nosotros para llevar tus objetivos adelante</p>
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column-reverse my-4 bg-light text-secondary border-5 rounded-3 p-5">
@@ -37,8 +38,8 @@
             </div>
 
             <hr />
-                <div class="">
-                    <h1 runat="server" id="montoTotal"> Total de compra: $<%: Math.Truncate(total).ToString("N0") %></h1>
+                <div>
+                    <h1 class="titulo2 ps-4"  runat="server" id="montoTotal"> Total de compra: $<%: Math.Truncate(total).ToString("N0") %></h1>
                 </div>
 
             <hr />

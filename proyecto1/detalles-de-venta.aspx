@@ -2,21 +2,22 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-    <div class="d-flex justify-content-center align-items-start flex-column my-4 bg-dark border-5 rounded-3 p-4 mt-5 shadow">
-        <h1 class="text-light">Productos de la compra</h1>
-        <asp:Button CssClass="text-primary border-0 bg-transparent" ID="cerrarSesion" runat="server" Text="(Cerrar sesion)" OnClick="cerrarSesion_Click" />
+    <div class=" bajoMenu pt-2">
+        <div class="d-flex justify-content-center align-items-start flex-column my-4 bg-dark border-5 rounded-3 p-4 mt-5 mx-2 shadow">
+            <h1 class="text-light">Productos de la compra</h1>
+            <asp:Button CssClass="text-primary border-0 bg-transparent" ID="cerrarSesion" runat="server" Text="(Cerrar sesion)" OnClick="cerrarSesion_Click" />
+        </div>
     </div>
 
     <div class="d-flex justify-content-center align-items-start flex-column p-5 border-5 border-light shadow">
-        <h1 class="text-decoration-underline">Datos de la compra</h1>
+        <h1 class="text-decoration-underline fw-bold">Datos de la compra</h1>
         <p class="m-0"><strong> Fecha de compra: </strong><%: venta.fecha.ToString("dd/MM/yyyy") %> </p>
         <p class="m-0"><strong> Estado de compra: </strong><%: venta.estado.nombre %> </p>
         <p class="m-0"><strong> Monto total: $ </strong><%: (Math.Truncate(venta.monto*100)/100).ToString("N0") %> </p>
     </div>
 
 
-    <div class="w-100 d-flex justify-content-center align-items-center flex-column">
+    <div class="w-100 d-flex justify-content-center align-items-center flex-column my-4">
         <% foreach (var detalleVenta in detalleVentasList)
             { %>
 
