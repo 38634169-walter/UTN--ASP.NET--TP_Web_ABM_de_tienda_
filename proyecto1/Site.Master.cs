@@ -18,9 +18,15 @@ namespace proyecto1
         public Articulo art;
         public static Usuario usuario;
         public string ventaId;
+        public static bool b=false;
+        public static bool b2=false;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) subCategoriasList = new List<SubCategoria>();
+            if (!IsPostBack)
+            {
+                b = false;
+                b2 = false;
+            }
             detalleVentasList = new List<DetalleVenta>();
             categoriasList = new List<Categoria>();
             CategoriaNegocio catNego = new CategoriaNegocio();
@@ -98,30 +104,42 @@ namespace proyecto1
 
         protected void buttonElectrodomesticos_Click(object sender, EventArgs e)
         {
-            Categoria categoria = new Categoria();
-            CategoriaNegocio catNego = new CategoriaNegocio();
-            categoria=catNego.buscar("nombreCategoria", "Electrodomesticos");
-            SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
-            subCategoriasList = new List<SubCategoria>();
-            subCategoriasList=subCatNego.listar("categoriaId",categoria.nombre.ToString());
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "cambiarColor", "cambiar_color();", true);
-            buttonRopa.Style.Remove("background");
-            buttonElectrodomesticos.Style.Add("background", "rgb(250, 215, 160 )");
-            subCategoriasContainer.Style.Add("display", "block");
+            if (b==false)
+            {
+                SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
+                subCategoriasList = new List<SubCategoria>();
+                subCategoriasList = subCatNego.listar("categoriaId", "Electrodomesticos");
+                foreach (var el in subCategoriasList)
+                {
+                    labelElectrodomesticos.Text += "<a class='ms-4' href='sub-categoria.aspx?id=" + el.id + "'> > " + el.nombre + "</a> </br>";
+                }
+                b = true;
+            }
+            else
+            {
+                labelElectrodomesticos.Text="";
+                b = false;
+            }
         }
 
         protected void buttonRopa_Click(object sender, EventArgs e)
         {
-            Categoria categoria = new Categoria();
-            CategoriaNegocio catNego = new CategoriaNegocio();
-            categoria = catNego.buscar("nombreCategoria", "Ropa");
-            SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
-            subCategoriasList = new List<SubCategoria>();
-            subCategoriasList = subCatNego.listar("categoriaId", categoria.nombre.ToString());
-            
-            buttonElectrodomesticos.Style.Remove("background");
-            buttonRopa.Style.Add("background", "rgb(250, 215, 160 )");
-            subCategoriasContainer.Style.Add("display", "block");
+            if (b2 == false)
+            {
+                SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
+                subCategoriasList = new List<SubCategoria>();
+                subCategoriasList = subCatNego.listar("categoriaId", "Ropa");
+                foreach (var el in subCategoriasList)
+                {
+                    labelRopa.Text += "<a class='ms-4' href='sub-categoria.aspx?id=" + el.id + "'> > " + el.nombre + "</a> </br>";
+                }
+                b2 = true;
+            }
+            else
+            {
+                labelRopa.Text = "";
+                b2 = false;
+            }
         }
     }
 }

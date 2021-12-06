@@ -60,13 +60,13 @@ namespace proyecto1
         protected global::System.Web.UI.WebControls.LinkButton buttonComprar;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control UpdatePanel5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel5;
 
         /// <summary>
         /// Control buttonElectrodomesticos.
@@ -78,6 +78,15 @@ namespace proyecto1
         protected global::System.Web.UI.WebControls.LinkButton buttonElectrodomesticos;
 
         /// <summary>
+        /// Control labelElectrodomesticos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelElectrodomesticos;
+
+        /// <summary>
         /// Control buttonRopa.
         /// </summary>
         /// <remarks>
@@ -87,13 +96,13 @@ namespace proyecto1
         protected global::System.Web.UI.WebControls.LinkButton buttonRopa;
 
         /// <summary>
-        /// Control subCategoriasContainer.
+        /// Control labelRopa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl subCategoriasContainer;
+        protected global::System.Web.UI.WebControls.Label labelRopa;
 
         /// <summary>
         /// Control MainContent.

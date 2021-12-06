@@ -7,6 +7,6 @@ function confirmarDesicion(desicion) {
     }
     if (desicion == "cerrar") {
         $('#modal').removeClass('d-block');
-        $('#modal').addClass('d-none');
+        $('#modal').removeClass('modal');
     }
 }
