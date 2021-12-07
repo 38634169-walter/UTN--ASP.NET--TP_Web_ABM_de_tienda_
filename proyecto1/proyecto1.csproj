@@ -281,11 +281,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\APP Escritorio\TPs\TP WinForm\TP_WinForm\modelo\modelo.csproj">
+    <ProjectReference Include="..\modelo\modelo.csproj">
       <Project>{07b26bdb-5305-47b0-90c0-2d04640697c9}</Project>
       <Name>modelo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\APP Escritorio\TPs\TP WinForm\TP_WinForm\negocio\negocio.csproj">
+    <ProjectReference Include="..\negocio\negocio.csproj">
       <Project>{cd2d2524-6708-4224-a3a6-99c9c22f6039}</Project>
       <Name>negocio</Name>
     </ProjectReference>

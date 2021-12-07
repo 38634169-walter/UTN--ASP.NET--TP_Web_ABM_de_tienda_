@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-2">
                     </div>
-                    <div class="col-8 bg-gradient bg-secondary d-flex justify-content-center align-items-center flex-row py-4 my-3 rounded-3">
+                    <div class="col-8 bg-gradient d-flex justify-content-center align-items-center flex-sm-row flex-column py-4 my-3 rounded-3 shadow fondo1">
                         <div class="d-flex justify-content-center align-items-center flex-column mx-1">
                             <div id="nombre" class="my-1 d-flex justify-content-center align-items-start flex-column">
                                 <asp:Label ID="LabelNombre" runat="server" Text="Nombre: "></asp:Label>
@@ -77,10 +77,10 @@
                     <div class="col-2">
                     </div>
 
-                    <div class="col-8 bg-gradient bg-secondary d-flex justify-content-center align-items-center flex-column py-4 my-3 rounded-3">
-                        <div class="d-flex justify-content-center align-items-center flex-row">
+                    <div class="col-8 bg-gradient d-flex justify-content-center align-items-center flex-column py-4 my-3 rounded-3 shadow fondo1">
+                        <div class="d-flex justify-content-center align-items-center flex-sm-row flex-column">
 
-                            <div class="d-flex justify-content-center align-items-center flex-column mx-1">
+                            <div class="d-flex justify-content-center align-items-center flex-column mx-1 ">
                                 <div id="email" class="my-1 d-flex justify-content-center align-items-start flex-column">
                                     <asp:Label ID="LabelEmail" runat="server" Text="Email: "></asp:Label>
                                     <asp:TextBox CssClass="form-control" ID="txbEmail" runat="server" ClientIDMode="Static"></asp:TextBox>

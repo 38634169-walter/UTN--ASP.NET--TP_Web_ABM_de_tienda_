@@ -36,7 +36,7 @@
             margin-top: 80px;
         }
 
-        .fondo1 {
+        .fondo1{
             background: rgb(206, 199, 136);
         }
 
@@ -117,41 +117,50 @@
                     <asp:Button class="btn btn-success mt-2" ID="Button1" runat="server" OnClick="Button1_Click" Text="Buscar" />
                 </div>
             </ul>
-            <ul class="collapse w-100 pb-5" style="max-height: 50vh; overflow-y: scroll;" id="carrito">
+            <ul class="collapse w-100 pb-5" style="max-height: 60vh; overflow-y: scroll;" id="carrito">
                 <p class="h1 text-light fw-bold text-center">En mi carrito</p>
                 <div class="d-flex justify-content-center align-items-center">
-                    <i class="fas fa-shopping-cart text-dark bg-light rounded-circle h1 p-4"></i>
+                    <i class="fas fa-shopping-cart text-dark bg-light rounded-circle h4 p-4"></i>
                 </div>
 
                 <% if (detalleVentasList.Any())
                     {
                 %>
 
-                <asp:LinkButton CssClass="btn bg-success text-light d-flex justify-content-center align-items-center flex-row" Style="margin-top: -2cm; width: 15rem; height: 2cm;" ID="buttonComprar" runat="server" OnClick="buttonComprar_Click">
-                            <i class="fas fa-shipping-fast h3"></i>
-                            <p class="ps-2 h3">Comprar</p>
-                </asp:LinkButton>
-                <% foreach (var det in detalleVentasList)
-                    { %>
-                <div class="d-flex justify-content-start align-content-center flex-row border border-light border-end-0 border-start-0 my-2 py-2">
-                    <img class="mx-2" src="<%: !(string.IsNullOrEmpty(det.articulo.imagen1)) ? det.articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
+                         <% foreach (var det in detalleVentasList)
+                             { %>
+                         <div class="d-flex justify-content-start align-content-center flex-row border border-light border-end-0 border-start-0 my-2 py-2">
+                             <img class="mx-2" src="<%: !(string.IsNullOrEmpty(det.articulo.imagen1)) ? det.articulo.imagen1 : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg" %>" width="100px" height="100px" />
 
-                    <div class="d-flex justify-content-center align-items-start flex-column">
-                        <strong class="text-light">Nombre: <%: det.articulo.nombre %></strong>
-                        <div class="d-flex justify-content-center align-items-center flex-row">
-                            <strong class="text-light pe-2">Precio: </strong>
-                            <strong class="text-light" style="font-size: 15px;">$ <%: Convert.ToDecimal(det.articulo.precioEntero).ToString("N0") %> </strong>
-                            <strong class="text-light pb-1" style="font-size: 11px;"><%: det.articulo.precioDecimal %></strong>
+                             <div class="d-flex justify-content-center align-items-start flex-column">
+                                 <strong class="text-light">Nombre: <%: det.articulo.nombre %></strong>
+                                 <div class="d-flex justify-content-center align-items-center flex-row">
+                                     <strong class="text-light pe-2">Precio: </strong>
+                                     <strong class="text-light" style="font-size: 15px;">$ <%: Convert.ToDecimal(det.articulo.precioEntero).ToString("N0") %> </strong>
+                                     <strong class="text-light pb-1" style="font-size: 11px;"><%: det.articulo.precioDecimal %></strong>
+                                 </div>
+                                 <strong class="text-light">Cantidad: <%: det.cantidad %></strong>
+                             </div>
+
+                             <div class=" position-relative">
+                                 <a href="quitarArticulo.aspx?id= <%: det.articulo.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row">Quitar</a>
+                             </div>
+                         </div>
+                             
+                             <div class="d-none"> <%: total+= det.articulo.precio * det.cantidad %></div>
+
+                         <% } %>
+                        <div class="d-flex justify-content-center align-content-start flex-column mt-2">
+                            <div class="d-flex justify-content-start align-content-center flex-row text-light">
+                                <h1 class="titulo2"> Total: $ <%: (Math.Truncate(total * 100) /100).ToString("N0") %></h1>
+                            </div>
+                            <div class="d-flex justify-content-start align-items-center">
+                                <asp:LinkButton CssClass="btn bg-success text-light d-flex justify-content-center align-items-center flex-row p-2" ID="LinkButton1" runat="server" OnClick="buttonComprar_Click">
+                                     <i class="fas fa-shipping-fast h3"></i>
+                                     <p class="ps-2 h3">Comprar</p>
+                                </asp:LinkButton>
+                            </div>
                         </div>
-                        <strong class="text-light">Cantidad: <%: det.cantidad %></strong>
-                    </div>
-
-                    <div class=" position-relative">
-                        <a href="quitarArticulo.aspx?id= <%: det.articulo.id %>" class="btn btn-danger mx-2 py-0 position-absolute bottom-0 d-flex justify-content-center align-content-center flex-row">Quitar</a>
-                    </div>
-                </div>
-
-                <% } %>
                 <% }
                     else
                     { %>

@@ -16,8 +16,10 @@ namespace proyecto1
         public Articulo art;
         public static Usuario usuario;
         public string ventaId;
+        public decimal total=0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            total = 0;
             detalleVentasList = new List<DetalleVenta>();
             if (Session["usuario"] != null)
             {
