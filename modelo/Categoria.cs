@@ -10,6 +10,7 @@ namespace modelo
     {
         public int id { get; set; }
         public string nombre { get; set; }
+        public string icono { get; set; }
         public SubCategoria subCategoria { get; set; }
         public override string ToString()
         {

@@ -42,48 +42,21 @@ namespace proyecto1
         protected global::System.Web.UI.WebControls.LinkButton buttonVaciarCarrito;
 
         /// <summary>
-        /// Control UpdatePanel5.
+        /// Control accordionFlushExample.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel5;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl accordionFlushExample;
 
         /// <summary>
-        /// Control buttonElectrodomesticos.
+        /// Control labelAccordionItem.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton buttonElectrodomesticos;
-
-        /// <summary>
-        /// Control labelElectrodomesticos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelElectrodomesticos;
-
-        /// <summary>
-        /// Control buttonRopa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton buttonRopa;
-
-        /// <summary>
-        /// Control labelRopa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelRopa;
+        protected global::System.Web.UI.WebControls.Label labelAccordionItem;
     }
 }

@@ -4,13 +4,16 @@
         <ContentTemplate>
 
     
-            <div class="bajoMenu pt-4">
+            <div class="bajoMenu pt-4 fondo4">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-sm-2 col-0">
                     </div>
-                    <div class="col-8">
-                        <h1 class="text-center">Bienvenido! Si no estas registrado podes hacerlo facil y rapido</h1>
-                        <div class="d-flex justify-content-center align-items-center flex-column my-3">
+                    <div class="col-sm-8 col-12">
+                        <div class="text-center titulo2">
+                            <h1>Bienvenido! </h1>
+                            <h3>Si no estas registrado podes hacerlo facil y rapido</h3>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center flex-column my-3 py-3 border-5 rounded-circle fondo1 shadow">
                             
                             <div id="usuario">
                                 <asp:Label ID="labelUsuario" runat="server" Text="Usuario:"></asp:Label>
@@ -29,7 +32,7 @@
                             <p>Podes registrarte presionando.. <a href="/registrarse.aspx" class="text-primary"> acá </a></p>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-sm-2 col-0">
                     </div>
                 </div>
             </div>

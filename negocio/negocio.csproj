@@ -54,7 +54,7 @@
     <Compile Include="VentaNegocio.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\WEB\TPs\E-commerce%28webForms%29\solucionTienda\conexion\conexion.csproj">
+    <ProjectReference Include="..\conexion\conexion.csproj">
       <Project>{f139beb6-7110-468c-9b63-7796de0c84c8}</Project>
       <Name>conexion</Name>
     </ProjectReference>

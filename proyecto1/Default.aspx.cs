@@ -14,18 +14,16 @@ namespace proyecto1
     {
         public List<Articulo> articuloList;
         public List<DetalleVenta> detalleVentaList;
+        public static List<Categoria> categoriaList;
         public static List<SubCategoria> subCategoriasList;
-        public static bool b = false;
-        public static bool b2 = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                b = false;
-                b2 = false;
+                agregar_acordion();
             }
             ArticuloNegocio artNego = new ArticuloNegocio();
-            articuloList = artNego.listar("todo","");
+            articuloList = artNego.listar("todo", "");
             if (Request.QueryString["accion"] != null && !IsPostBack)
             {
                 if (Request.QueryString["accion"] == "agregado") ScriptManager.RegisterStartupScript(this, typeof(Page), "agregado", "agregado();", true);
@@ -42,48 +40,44 @@ namespace proyecto1
 
             foreach (var detalleVenta in detalleVentaList)
             {
-                detNego.eliminar(detalleVenta.articulo.id.ToString(),Session["ventaId"].ToString());
+                detNego.eliminar(detalleVenta.articulo.id.ToString(), Session["ventaId"].ToString());
             }
-            Response.Redirect("Default.aspx?accion="+"eliminado");
+            Response.Redirect("Default.aspx?accion=" + "eliminado");
         }
 
-        protected void buttonElectrodomesticos_Click(object sender, EventArgs e)
+        public void agregar_acordion()
         {
-            if (b == false)
-            {
-                SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
-                subCategoriasList = new List<SubCategoria>();
-                subCategoriasList = subCatNego.listar("categoriaId", "Electrodomesticos");
-                foreach (var el in subCategoriasList)
-                {
-                    labelElectrodomesticos.Text += "<a class='ms-4 text-decoration-none text-dark' href='sub-categoria.aspx?id=" + el.id + "'> > " + el.nombre + "</a> </br>";
-                }
-                b = true;
-            }
-            else
-            {
-                labelElectrodomesticos.Text = "";
-                b = false;
-            }
-        }
+            CategoriaNegocio catNego = new CategoriaNegocio();
+            categoriaList = new List<Categoria>();
+            categoriaList = catNego.listar();
 
-        protected void buttonRopa_Click(object sender, EventArgs e)
-        {
-            if (b2 == false)
+            foreach (var categoria in categoriaList)
             {
-                SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
+
                 subCategoriasList = new List<SubCategoria>();
-                subCategoriasList = subCatNego.listar("categoriaId", "Ropa");
-                foreach (var el in subCategoriasList)
+                SubCategoriaNegocio subCatNego = new SubCategoriaNegocio();
+                subCategoriasList = subCatNego.listar("categoriaId", categoria.nombre.ToString());
+
+
+                System.Web.UI.WebControls.Label item = new System.Web.UI.WebControls.Label();
+                item.Text += "<div class='accordion-item fondo2'>" +
+                                "<h6 class='accordion-header p-3 fondo3' id = 'headingOne' " +
+                                    "<button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse" + categoria.id + categoria.nombre + "' aria-expanded='false' aria-controls='flush-collapseOne'>" +
+                                    categoria.icono +
+                                    categoria.nombre +
+                                    "</button>" +
+                                "</h6> ";
+                foreach (var subCate in subCategoriasList)
                 {
-                    labelRopa.Text += "<a class='ms-4 text-decoration-none text-dark' href='sub-categoria.aspx?id=" + el.id + "'> > " + el.nombre + "</a> </br>";
+                    item.Text += "<div id = 'collapse" + categoria.id + categoria.nombre + "' class='accordion-collapse collapse' aria-labelledby='headingOne'>" +
+                                    "<div class='accordion-body fondo2'>" +
+                                          "<a class='text-decoration-none text-dark' href='sub-categoria.aspx?id=" + subCate.id.ToString() + "' >> " + subCate.nombre.ToString() + "</a> " +
+
+                                    "</div>" +
+                                  "</div>";
                 }
-                b2 = true;
-            }
-            else
-            {
-                labelRopa.Text = "";
-                b2 = false;
+                item.Text += "</div>";
+                labelAccordionItem.Text += item.Text;
             }
         }
     }

@@ -55,34 +55,15 @@
         </div>
 
 
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="bg-warning w-100 text-center py-1">
+                <h5 class="titulo1 text-light">Categorias</h5>
+            </div>
+        </div>
 
-        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-            <ContentTemplate>
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                    <div class="bg-warning w-100 text-center py-1">
-                        <h5 class="titulo1 text-light">Categorias</h5>
-                    </div>
-                </div>
-
-
-                 <div class=" d-flex justify-content-center align-items-start flex-column ps-4 py-2 m-0" style="background:rgb(241, 233, 163)">
-                     <div class="d-flex justify-content-center align-items-start flex-column">
-                         <asp:LinkButton CssClass="h6 text-decoration-none text-dark fw-bold" ID="buttonElectrodomesticos" ClientIDMode="Static" runat="server" OnClick="buttonElectrodomesticos_Click">
-                             <i class="fas fa-tv"></i>
-                             Electrodomestricos
-                         </asp:LinkButton>
-                         <asp:Label ID="labelElectrodomesticos" runat="server" Text=""></asp:Label>           
-                     </div>
-                     <div class="d-flex justify-content-center align-items-start flex-column">
-                         <asp:LinkButton CssClass="h6 text-decoration-none text-dark fw-bold" ID="buttonRopa" ClientIDMode="Static" runat="server" OnClick="buttonRopa_Click">
-                             <i class="fas fa-tshirt"></i>
-                             Ropa
-                         </asp:LinkButton>
-                         <asp:Label ID="labelRopa" ClientIDMode="Static" runat="server" Text=""></asp:Label>           
-                     </div>                
-                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+        <div class="accordion accordion-flush" id="accordionFlushExample" runat="server">
+            <asp:Label ID="labelAccordionItem" runat="server" Text=""></asp:Label>                     
+         </div>
 
 
         <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="z-index: 1;">
@@ -98,7 +79,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center flex-column my-2">
-                    <a href=" verArticulo.aspx?id=<%: articulo.id %>" class="btn btn-primary px-5">Ver</a>
+                    <a href=" verArticulo.aspx?id=<%: articulo.id %>" class="btn btn-warning fw-bold text-light px-5">Ver</a>
                 </div>
             </div>
             <% } %>

@@ -20,6 +20,7 @@ namespace proyecto1
                 ArticuloNegocio artNego = new ArticuloNegocio();
                 articulosList = new List<Articulo>();
                 articulosList = artNego.listar("subCategoraId",Request.QueryString["id"].ToString());
+                labelTitulo.Text = articulosList[0].subCategoria.nombre;
             }
         }
     }

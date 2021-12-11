@@ -4,7 +4,7 @@
 
     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
-            
+
             <div class="d-none position-fixed top-50 start-50 translate-middle" id="modal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -27,7 +27,11 @@
                 </div>
             </div>
 
-            <div class=" bajoMenu pt-4">
+            <div class=" bajoMenu pb-4 pt-3 fondo4" >
+                <div class="py-5 text-center titulo2 rounded-circle fondo1 shadow">
+                    <h1>Gracias por confiar!</h1>
+                    <h3>Ahora podes registrarte facil y rapido</h3>
+                </div>
                 <div class="row">
                     <div class="col-2">
                     </div>
@@ -71,6 +75,7 @@
                     <div class="col-2">
                     </div>
                 </div>
+
 
 
                 <div class="row">
@@ -125,6 +130,7 @@
                 <div class="d-flex justify-content-center align-items-center my-3">
                     <asp:LinkButton CssClass="btn bg-success text-light" ID="buttonRegistrar" runat="server" OnClientClick="return validar_registro()" OnClick="buttonRegistrar_Click" CausesValidation="False" ValidateRequestMode="Disabled">Registrarme</asp:LinkButton>
                 </div>
+            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 

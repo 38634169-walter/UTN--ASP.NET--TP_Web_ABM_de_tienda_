@@ -23,22 +23,30 @@
         a {
             text-decoration: none;
         }
-
-        .titulo1 {
-            font-family: 'Abril Fatface', cursive;
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
         }
 
-        .titulo2 {
-            font-family: 'Fredoka One', cursive;
-        }
+        .titulo1 {font-family: 'Abril Fatface', cursive;}
+
+        .titulo2 {font-family: 'Fredoka One', cursive;}
+
+        .titulo3{font-family: 'Bebas Neue', cursive;}
+
+        .titulo4{font-family: 'Lobster', cursive;}
+
 
         .bajoMenu {
             margin-top: 80px;
         }
 
-        .fondo1{
-            background: rgb(206, 199, 136);
-        }
+        .fondo1{background: rgb(206, 199, 136);}
+        .fondo2{background: rgb(241, 233, 163);}
+        .fondo3{background: rgb(255, 250, 187);}
+        .fondo4{background: rgb(194, 183, 141);}
+
 
         .imagenVer {
             width: 300px;
@@ -69,6 +77,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
     <form runat="server">

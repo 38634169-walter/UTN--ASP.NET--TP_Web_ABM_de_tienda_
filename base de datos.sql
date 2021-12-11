@@ -14,8 +14,14 @@ CREATE TABLE Marcas(
 )
 CREATE TABLE Categorias(
 	IDCategoria SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	nombreCat VARCHAR(30) NOT NULL
+	nombreCat VARCHAR(30) NOT NULL,
+	icono VARCHAR (40) NOT NULL
 )
+select * from Categorias
+update Categorias SET icono ='<i class="fas fa-tshirt"></i>' WHERE IDCategoria=2
+ALTER TABLE Categorias 
+ALTER COLUMN icono VARCHAR(40) NOT NULL
+
 CREATE TABLE SubCategorias(
 	IDSubCategoria SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ID_Categoria SMALLINT NOT NULL FOREIGN KEY REFERENCES Categorias(IDCategoria),
@@ -121,9 +127,9 @@ INSERT INTO Marcas(ID_Pais,nombreMar)VALUES
 (1,'Tascani'),
 (3,'Nike')
 
-INSERT INTO Categorias(nombreCat) VALUES
-('Electrodomesticos'),
-('Ropa')
+INSERT INTO Categorias(nombreCat,icono) VALUES
+('Electrodomesticos','<i class="fas fa-tv pe-2"></i>'),
+('Ropa','<i class="fas fa-tshirt pe-2"></i>')
 
 INSERT INTO SubCategorias(ID_Categoria,nombreSub) VALUES
 (1,'Licuadoras'),

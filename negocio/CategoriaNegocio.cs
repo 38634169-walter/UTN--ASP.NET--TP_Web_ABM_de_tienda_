@@ -18,16 +18,14 @@ namespace negocio
             ConexionDB con = new ConexionDB();
             try
             {
-                con.consultar("SELECT * FROM Categorias c, SubCategorias sc WHERE c.IDCategoria = sc.ID_Categoria");
+                con.consultar("SELECT * FROM Categorias");
                 con.ejecutar_lectura();
                 while(con.lector.Read())
                 {
                     Categoria cat = new Categoria();
                     cat.id = Convert.ToInt32(con.lector["IDCategoria"]);
                     cat.nombre = (string)con.lector["nombreCat"];
-                    cat.subCategoria = new SubCategoria();
-                    cat.subCategoria.id = Convert.ToInt32(con.lector["IDSubCategoria"]);
-                    cat.subCategoria.nombre = (string)con.lector["nombreSub"];
+                    cat.icono = (string)con.lector["icono"];
                     listaCat.Add(cat);
                 }
                 return listaCat;
